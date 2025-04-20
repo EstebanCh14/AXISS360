@@ -8,29 +8,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- AOS Animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    /* Animación de fondo gradient en el banner */
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .animated-banner {
-      background: linear-gradient(270deg, #0057e7, #0094f7, #ffea00);
-      background-size: 600% 600%;
-      animation: gradientAnimation 10s ease infinite;
-    }
-
-    /* Animación para el logo (rebote sutil) */
-    @keyframes logoBounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
-    }
-    .animated-logo {
-      animation: logoBounce 2s infinite;
-    }
-  </style>
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
 
@@ -38,85 +17,33 @@
   <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-30">
     <div class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
       <a href="#" class="flex items-center text-3xl font-bold text-indigo-600 dark:text-indigo-400">
-        <img src="./assets/3.png" alt="Logo CLEJ-TECH" class="h-10 w-10 mr-2 animated-logo">
+        <img src="assets/3.png" alt="Logo CLEJ-TECH" class="h-10 w-10 mr-2">
         CLEJ-TECH
       </a>
-      <!-- Search bar -->
-      <div class="flex-1 mx-6 hidden md:block">
-        <input type="search" placeholder="Buscar dispositivos o marcas..." class="w-full max-w-lg px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-      </div>
-      <!-- Nav + Buttons -->
-      <div class="flex items-center space-x-4">
-        <nav class="hidden md:flex space-x-6 font-medium">
-          <a href="#registro" class="hover:text-indigo-500">Registro</a>
-          <a href="#busqueda" class="hover:text-indigo-500">Búsqueda</a>
-          <a href="#recomendaciones" class="hover:text-indigo-500">IA</a>
-          <a href="#opiniones" class="hover:text-indigo-500">Opiniones</a>
-          <a href="#ecommerce" class="hover:text-indigo-500">E-commerce</a>
-          <a href="#seguridad" class="hover:text-indigo-500">Seguridad</a>
-        </nav>
-        <!-- Mobile menu button -->
-        <button id="menu-btn" class="md:hidden focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        <!-- Theme toggle -->
-        <button id="theme-btn" class="focus:outline-none">
-          <svg id="moon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-11h-1M4.34 12h-1m15.07 7.07l-.7-.7M6.34 6.34l-.7-.7m12.02 0l-.7.7M6.34 17.66l-.7.7M12 5a7 7 0 000 14 7 7 0 000-14z" />
-          </svg>
-          <svg id="sun" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-200 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-11h-1M4.34 12h-1m15.07 7.07l-.7-.7M6.34 6.34l-.7-.7m12.02 0l-.7.7M6.34 17.66l-.7.7" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile menu panel -->
-    <div id="menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-      <nav class="flex flex-col p-4 space-y-2">
-        <a href="#registro" class="hover:text-indigo-500">Registro</a>
-        <a href="#busqueda" class="hover:text-indigo-500">Búsqueda</a>
-        <a href="#recomendaciones" class="hover:text-indigo-500">IA</a>
-        <a href="#opiniones" class="hover:text-indigo-500">Opiniones</a>
-        <a href="#ecommerce" class="hover:text-indigo-500">E-commerce</a>
-        <a href="#seguridad" class="hover:text-indigo-500">Seguridad</a>
-      </nav>
     </div>
   </header>
 
-  <!-- Banner con animación de fondo -->
-  <section class="animated-banner py-20">
-    <div class="container mx-auto px-6 text-center">
-      <h1 class="text-5xl font-bold text-white mb-4" data-aos="fade-down">Bienvenido a CLEJ-TECH</h1>
-      <p class="text-xl text-white mb-8" data-aos="fade-up" data-aos-delay="300">
-        Descubre, compara y elige la mejor tecnología.
-      </p>
-      <button class="bg-white text-indigo-600 font-semibold py-3 px-6 rounded-full transition transform hover:scale-105" data-aos="zoom-in" data-aos-delay="500">
-        Empezar
-      </button>
-    </div>
-  </section>
-
   <main class="pt-32 pb-16 container mx-auto px-6 space-y-20 max-w-7xl">
-
-    <!-- Sección 1: Registro y perfil -->
+    <!-- Sección de Registro -->
     <section id="registro" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
       <h2 class="text-4xl font-bold mb-6">Registro y Personalización de Perfil</h2>
       <form class="space-y-6 max-w-2xl">
-        <!-- formulario ampliado con espacio -->
+        <!-- Campo de correo -->
         <div>
           <label class="block text-lg font-medium mb-1">Correo Electrónico</label>
           <input type="email" placeholder="tu@correo.com" class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         </div>
+        <!-- Botones de registro -->
         <div>
           <span class="block text-lg font-medium mb-1">Registrarse con</span>
           <div class="flex space-x-4">
-            <button class="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg transition">Google</button>
+            <!-- Contenedor para el botón de Google -->
+            <div id="googleSignInButton" class="flex-1"></div>
+            <!-- Botón para Facebook -->
             <button class="flex-1 bg-blue-800 hover:bg-blue-900 text-white py-3 rounded-lg transition">Facebook</button>
           </div>
         </div>
+        <!-- Resto del formulario -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <label class="block text-lg font-medium mb-1">Marcas Favoritas</label>
@@ -128,7 +55,7 @@
           </div>
           <div>
             <label class="block text-lg font-medium mb-1">Presupuesto</label>
-            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none">
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black">
               <option>&lt; $200</option>
               <option>$200 - $500</option>
               <option>&gt; $500</option>
@@ -136,73 +63,16 @@
           </div>
           <div>
             <label class="block text-lg font-medium mb-1">Tipo de Dispositivo</label>
-            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none">
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black">
               <option>Smartphone</option>
               <option>Tablet</option>
               <option>Portátil</option>
             </select>
           </div>
         </div>
-        <div class="flex items-center">
-          <input type="checkbox" id="2fa" class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 rounded" />
-          <label for="2fa" class="ml-2 text-lg font-medium">Autenticación en dos pasos</label>
-        </div>
         <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition">Crear Cuenta</button>
       </form>
     </section>
-
-    <!-- Sección 2: Motor de búsqueda y comparación -->
-    <section id="busqueda" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
-      <h2 class="text-4xl font-bold mb-6">Motor de Búsqueda y Comparación</h2>
-      <div class="space-y-6 max-w-4xl">
-        <input type="text" placeholder="Buscar dispositivos, marcas, características..." class="w-full border border-gray-300 dark:border-gray-700 rounded-full px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <input type="number" placeholder="Precio mínimo" class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none" />
-          <input type="number" placeholder="Precio máximo" class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none" />
-          <select class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none">
-            <option>Ordenar por popularidad</option>
-            <option>Ordenar por precio</option>
-            <option>Ordenar por opiniones</option>
-          </select>
-        </div>
-        <button class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-lg transition">Buscar</button>
-      </div>
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Ejemplo de tarjeta -->
-        <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm hover:shadow-md transition">
-          <h3 class="text-2xl font-semibold mb-2">Dispositivo A</h3>
-          <p class="mb-1">Precio: <span class="font-bold">$499</span></p>
-          <p class="mb-1">Especificaciones: ...</p>
-          <p class="mb-4">Opiniones: ★★★★☆</p>
-          <button class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-6 rounded-lg transition">Comparar</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección 3: IA / Recomendaciones -->
-    <section id="recomendaciones" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
-      <h2 class="text-4xl font-bold mb-6">Inteligencia Artificial y Recomendaciones</h2>
-      <p class="text-lg">Aquí encontrarás sugerencias personalizadas basadas en inteligencia artificial para ayudarte a elegir el mejor dispositivo.</p>
-    </section>
-
-    <!-- Sección 4: Opiniones -->
-    <section id="opiniones" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
-      <h2 class="text-4xl font-bold mb-6">Opiniones y Valoraciones</h2>
-      <p class="text-lg">Lee las opiniones de usuarios y expertos para tomar una decisión informada.</p>
-    </section>
-
-    <!-- Sección 5: E-commerce -->
-    <section id="ecommerce" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
-      <h2 class="text-4xl font-bold mb-6">E-commerce y Ofertas</h2>
-      <p class="text-lg">Explora nuestras ofertas exclusivas y accede a las mejores promociones en tecnología.</p>
-    </section>
-
-    <!-- Sección 6: Seguridad -->
-    <section id="seguridad" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
-      <h2 class="text-4xl font-bold mb-6">Seguridad y Privacidad</h2>
-      <p class="text-lg">Conoce las medidas de seguridad implementadas para proteger tus datos y garantizar una experiencia confiable.</p>
-    </section>
-
   </main>
 
   <footer class="bg-white dark:bg-gray-800 py-8">
@@ -215,17 +85,27 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true });
-    const btn = document.getElementById('menu-btn'),
-          menu = document.getElementById('menu');
-    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-    const themeBtn = document.getElementById('theme-btn'),
-          sun = document.getElementById('sun'),
-          moon = document.getElementById('moon');
-    themeBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      sun.classList.toggle('hidden'); 
-      moon.classList.toggle('hidden');
+
+    // Función callback para manejar la respuesta de Google
+    function handleCredentialResponse(response) {
+      console.log("Token de Google:", response.credential);
+      // Aquí podrías enviar el token al servidor para validarlo o crear una sesión
+    }
+
+    // Inicializa Google Identity Services
+    google.accounts.id.initialize({
+      client_id: "676544046017-sd497p0gqgr75v2pa53al6qt3posrohi.apps.googleusercontent.com",  // Tu Client ID
+      callback: handleCredentialResponse
     });
+
+    // Renderiza el botón de Google en el contenedor
+    google.accounts.id.renderButton(
+      document.getElementById("googleSignInButton"),
+      { theme: "outline", size: "large" }
+    );
+
+    // Opcional: Mostrar automáticamente el prompt de autenticación
+    // google.accounts.id.prompt();
   </script>
 </body>
 </html>
