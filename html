@@ -14,7 +14,10 @@
   <!-- Header -->
   <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-30">
     <div class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
-      <a href="#" class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">CLEJ-TECH</a>
+      <a href="#" class="flex items-center text-3xl font-bold text-indigo-600 dark:text-indigo-400">
+        <img src="assets/3.png" alt="Logo CLEJ-TECH" class="h-10 w-10 mr-2">
+        CLEJ-TECH
+      </a>
       <!-- Search bar -->
       <div class="flex-1 mx-6 hidden md:block">
         <input type="search" placeholder="Buscar dispositivos o marcas..." class="w-full max-w-lg px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
@@ -81,7 +84,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <label class="block text-lg font-medium mb-1">Marcas Favoritas</label>
-            <select multiple class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none">
+            <select multiple class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black">
               <option>Apple</option>
               <option>Samsung</option>
               <option>Xiaomi</option>
@@ -89,7 +92,7 @@
           </div>
           <div>
             <label class="block text-lg font-medium mb-1">Presupuesto</label>
-            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none">
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black">
               <option>&lt; $200</option>
               <option>$200 - $500</option>
               <option>&gt; $500</option>
@@ -97,7 +100,7 @@
           </div>
           <div>
             <label class="block text-lg font-medium mb-1">Tipo de Dispositivo</label>
-            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none">
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black">
               <option>Smartphone</option>
               <option>Tablet</option>
               <option>Portátil</option>
@@ -118,9 +121,9 @@
       <div class="space-y-6 max-w-4xl">
         <input type="text" placeholder="Buscar dispositivos, marcas, características..." class="w-full border border-gray-300 dark:border-gray-700 rounded-full px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <input type="number" placeholder="Precio mínimo" class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none" />
-          <input type="number" placeholder="Precio máximo" class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none" />
-          <select class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none">
+          <input type="number" placeholder="Precio mínimo" class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black" />
+          <input type="number" placeholder="Precio máximo" class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black" />
+          <select class="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none dark:text-black">
             <option>Ordenar por popularidad</option>
             <option>Ordenar por precio</option>
             <option>Ordenar por opiniones</option>
@@ -163,4 +166,3 @@
     });
   </script>
 </body>
-</html>
