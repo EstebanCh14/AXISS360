@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLEJ-TECH</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AOS Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
+
+  <!-- Header -->
+  <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-30">
+    <div class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
+      <a href="#" class="flex items-center text-3xl font-bold text-indigo-600 dark:text-indigo-400">
+        <img src="assets/3.png" alt="Logo CLEJ-TECH" class="h-10 w-10 mr-2">
+        CLEJ-TECH
+      </a>
+    </div>
+  </header>
+
+  <!-- Spinner de carga -->
+  <div id="spinner" class="mx-auto my-10"></div>
+
+  <!-- Contenido principal -->
+  <main class="pt-32 pb-16 container mx-auto px-6 space-y-20 max-w-7xl">
+    <!-- Sección de Registro -->
+    <section id="registro" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
+      <h2 class="text-4xl font-bold mb-6">Registro y Personalización de Perfil</h2>
+      <form id="registerForm" class="space-y-6 max-w-2xl">
+        <div>
+          <label class="block text-lg font-medium mb-1">Correo Electrónico</label>
+          <input type="email" placeholder="tu@correo.com" class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <span class="block text-lg font-medium mb-1">Registrarse con</span>
+          <div class="flex space-x-4">
+            <div id="googleSignInButton" class="flex-1"></div>
+            <button class="flex-1 bg-blue-800 hover:bg-blue-900 text-white py-3 rounded-lg transition btn-hover">Facebook</button>
+          </div>
+        </div>
+        <button id="submitButton" type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition btn-hover">Crear Cuenta</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-gray-800 py-8">
+    <div class="container mx-auto text-center text-sm text-gray-600 dark:text-gray-400">
+      &copy; 2025 CLEJ-TECH. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <!-- Scripts externo -->
+  <script src="scripts.js"></script>
+</body>
+</html>
