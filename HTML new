@@ -1,190 +1,435 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CLEJ-TECH</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLEJ-TECH - AXISS360</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- AOS Animations -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    rel="stylesheet"
+  />
   <!-- Google Identity Services -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script
+    src="https://accounts.google.com/gsi/client"
+    async
+    defer
+  ></script>
   <!-- Facebook SDK -->
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js"></script>
+  <script
+    async
+    defer
+    crossorigin="anonymous"
+    src="https://connect.facebook.net/es_ES/sdk.js"
+  ></script>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
-
   <!-- Header / Navbar -->
   <header class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
     <div class="container mx-auto flex items-center justify-between py-4 px-6">
-      <a href="#" class="flex items-center text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
-        <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2">
+      <a href="#inicio" class="flex items-center text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+        <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2" />
         CLEJ-TECH
       </a>
-      <nav class="hidden md:flex space-x-6 font-medium">
+      <nav class="hidden md:flex space-x-4 font-medium text-sm">
         <a href="#inicio" class="hover:text-indigo-600 dark:hover:text-indigo-400">Inicio</a>
         <a href="#registro" class="hover:text-indigo-600 dark:hover:text-indigo-400">Registro</a>
-        <a href="#comparacion" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comparar</a>
+        <a href="#busqueda" class="hover:text-indigo-600 dark:hover:text-indigo-400">Búsqueda</a>
         <a href="#recomendaciones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Recomendaciones</a>
+        <a href="#comparacion-productos" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comparación</a>
         <a href="#opiniones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Opiniones</a>
+        <a href="#notificaciones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Notificaciones</a>
         <a href="#ecommerce" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comercio</a>
-        <a href="#seguridad" class="hover:text-indigo-600 dark:hover:text-indigo-400">Seguridad</a>
+        <a href="#dispositivos-actuales" class="hover:text-indigo-600 dark:hover:text-indigo-400">Mis Dispositivos</a>
+        <a href="#perfil-uso" class="hover:text-indigo-600 dark:hover:text-indigo-400">Perfil de Uso</a>
+        <a href="#presupuesto" class="hover:text-indigo-600 dark:hover:text-indigo-400">Presupuesto</a>
         <a href="#privacidad" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacidad</a>
       </nav>
       <!-- Theme Toggle -->
       <button id="theme-toggle" class="ml-4 p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Toggle Light/Dark Theme">
         <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-          <!-- Icon filled via JS -->
+          <!-- Se actualizará mediante JS -->
         </svg>
       </button>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="inicio" class="pt-32 pb-20 bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
+  <!-- Sección Inicio -->
+  <section id="inicio" class="pt-32 pb-20 bg-gradient-to-r from-indigo-500 to-purple-500 text-white" data-aos="fade-down">
     <div class="container mx-auto text-center px-6">
-      <h1 class="text-5xl font-bold mb-4" data-aos="fade-down">Bienvenido a CLEJ-TECH</h1>
-      <p class="text-xl mb-8" data-aos="fade-up">Compara dispositivos, recibe recomendaciones personalizadas y compra con seguridad.</p>
-      <a href="#registro" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition" data-aos="zoom-in">Comienza Ahora</a>
+      <h1 class="text-5xl font-bold mb-4">Bienvenido a CLEJ-TECH</h1>
+      <p class="text-xl mb-8">Compara dispositivos, recibe recomendaciones personalizadas y compra con seguridad.</p>
+      <a href="#registro" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition">
+        Comienza Ahora
+      </a>
     </div>
   </section>
 
   <main class="container mx-auto px-6 space-y-20 max-w-6xl">
-
-    <!-- Registro & Perfil -->
+    <!-- Registro y Personalización -->
     <section id="registro" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-right">
-      <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">1. Registro y Personalización de Perfil</h2>
-      <form class="space-y-6">
-        <!-- Email -->
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">Registro y Personalización</h2>
+      <form class="space-y-6" onsubmit="event.preventDefault(); alert('Registro exitoso');">
+        <!-- Correo -->
         <div>
           <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Correo Electrónico</label>
-          <input type="email" placeholder="tu@correo.com" class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black dark:text-gray-200" />
+          <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <!-- Contraseña -->
+        <div>
+          <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Contraseña</label>
+          <input 
+            type="password" 
+            placeholder="Contraseña segura" 
+            required 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+            title="Mínimo 8 caracteres, 1 número, 1 mayúscula y 1 minúscula"
+            class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+          />
+        </div>
+        <!-- Confirmar Contraseña -->
+        <div>
+          <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Confirmar Contraseña</label>
+          <input type="password" placeholder="Confirmar contraseña" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <a href="#recuperar-password" class="text-indigo-600 hover:text-indigo-700 text-sm">¿Olvidaste tu contraseña?</a>
         </div>
         <!-- Social Login -->
         <div>
           <span class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Registrarse con</span>
           <div class="flex flex-col md:flex-row gap-4">
-            <!-- Google -->
             <div id="googleSignInButton" class="flex-1"></div>
-            <!-- Facebook -->
             <div class="flex-1">
               <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-scope="public_profile,email" onlogin="checkFacebookLoginState()"></div>
             </div>
           </div>
         </div>
-        <!-- Preferences -->
+        <!-- Preferencias Tecnológicas -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Marcas Favoritas</label>
-            <select multiple class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none text-black dark:text-gray-200">
+            <select multiple class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3">
               <option>Apple</option>
               <option>Samsung</option>
               <option>Xiaomi</option>
             </select>
           </div>
           <div>
-            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Presupuesto</label>
-            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none text-black dark:text-gray-200">
-              <option>&lt; $200</option>
-              <option>$200 - $500</option>
-              <option>&gt; $500</option>
-            </select>
-          </div>
-          <div>
             <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Tipo de Dispositivo</label>
-            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none text-black dark:text-gray-200">
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3">
               <option>Smartphone</option>
               <option>Tablet</option>
               <option>Portátil</option>
             </select>
           </div>
+          <div>
+            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Presupuesto</label>
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3">
+              <option>&lt; $200</option>
+              <option>$200 - $500</option>
+              <option>&gt; $500</option>
+            </select>
+          </div>
         </div>
-        <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition">Crear Cuenta</button>
+        <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition">
+          Crear Cuenta
+        </button>
       </form>
     </section>
 
-    <!-- Motor de Búsqueda y Comparación -->
-    <section id="comparacion" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-left">
-      <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">2. Motor de Búsqueda y Comparación</h2>
-      <p class="mb-6 text-black dark:text-gray-300">Encuentra y compara dispositivos con filtros avanzados:</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- ... tarjetas ... -->
+    <!-- Búsqueda de Dispositivos -->
+    <section id="busqueda" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-right">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Búsqueda de Dispositivos</h2>
+      <form class="mb-8" onsubmit="event.preventDefault(); alert('Buscando...');">
+        <div class="flex items-center">
+          <input type="text" id="searchQuery" placeholder="Buscar dispositivo..." class="flex-grow border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3" />
+          <button type="button" id="voiceSearch" class="ml-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded">
+            🎤
+          </button>
+          <button type="submit" class="ml-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded">
+            Buscar
+          </button>
+        </div>
+        <!-- Filtros avanzados -->
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-black dark:text-gray-200">Marca</label>
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3">
+              <option value="">Todas</option>
+              <option>Apple</option>
+              <option>Samsung</option>
+              <option>Xiaomi</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-black dark:text-gray-200">Precio</label>
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3">
+              <option value="">Todos</option>
+              <option value="200">&lt; $200</option>
+              <option value="200-500">$200 - $500</option>
+              <option value="500">&gt; $500</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-black dark:text-gray-200">Especificaciones</label>
+            <input type="text" placeholder="Procesador, RAM, etc." class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3" />
+          </div>
+        </div>
+      </form>
+      <!-- Resultados de búsqueda (ejemplo de tarjetas) -->
+      <div id="searchResults" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <img src="assets/product1.jpg" alt="Producto 1" class="w-full h-40 object-cover rounded" />
+          <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Producto 1</h3>
+          <p class="text-gray-600 dark:text-gray-400">Descripción breve del producto.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <img src="assets/product2.jpg" alt="Producto 2" class="w-full h-40 object-cover rounded" />
+          <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Producto 2</h3>
+          <p class="text-gray-600 dark:text-gray-400">Descripción breve del producto.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <img src="assets/product3.jpg" alt="Producto 3" class="w-full h-40 object-cover rounded" />
+          <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Producto 3</h3>
+          <p class="text-gray-600 dark:text-gray-400">Descripción breve del producto.</p>
+        </div>
       </div>
+    </section>
+
+    <!-- Recomendaciones Basadas en IA -->
+    <section id="recomendaciones" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">Recomendaciones Personalizadas</h2>
+      <p class="mb-4 text-black dark:text-gray-300">
+        Basado en su historial y preferencias, le recomendamos los siguientes productos:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
+          <img src="assets/recom1.jpg" alt="Recomendación 1" class="w-full h-40 object-cover rounded" />
+          <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Recomendación 1</h3>
+          <p class="text-gray-600 dark:text-gray-400">Producto económico y popular.</p>
+          <button class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Marcar como útil</button>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
+          <img src="assets/recom2.jpg" alt="Recomendación 2" class="w-full h-40 object-cover rounded" />
+          <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Recomendación 2</h3>
+          <p class="text-gray-600 dark:text-gray-400">Alto rendimiento para tareas diarias.</p>
+          <button class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Marcar como útil</button>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
+          <img src="assets/recom3.jpg" alt="Recomendación 3" class="w-full h-40 object-cover rounded" />
+          <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Recomendación 3</h3>
+          <p class="text-gray-600 dark:text-gray-400">Excelente relación calidad-precio.</p>
+          <button class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Marcar como útil</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparación de Productos -->
+    <section id="comparacion-productos" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-left">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Comparación de Productos</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+          <thead class="bg-gray-200 dark:bg-gray-800">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Característica</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Producto 1</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Producto 2</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Producto 3</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">Precio</td>
+              <td class="px-6 py-4 whitespace-nowrap">$300</td>
+              <td class="px-6 py-4 whitespace-nowrap">$350</td>
+              <td class="px-6 py-4 whitespace-nowrap">$320</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">Procesador</td>
+              <td class="px-6 py-4 whitespace-nowrap">Quad Core 2.0GHz</td>
+              <td class="px-6 py-4 whitespace-nowrap">Octa Core 2.2GHz</td>
+              <td class="px-6 py-4 whitespace-nowrap">Quad Core 2.1GHz</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">Memoria RAM</td>
+              <td class="px-6 py-4 whitespace-nowrap">4GB</td>
+              <td class="px-6 py-4 whitespace-nowrap">6GB</td>
+              <td class="px-6 py-4 whitespace-nowrap">4GB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Análisis de Opiniones -->
+    <section id="opiniones" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">Análisis de Opiniones</h2>
+      <div class="space-y-6">
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
+          <div class="flex items-center mb-2">
+            <img src="assets/user1.jpg" alt="Usuario 1" class="h-10 w-10 rounded-full mr-4">
+            <div>
+              <h4 class="text-lg font-bold text-black dark:text-gray-200">Usuario 1</h4>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">01/05/2025</p>
+            </div>
+          </div>
+          <p class="text-black dark:text-gray-300">Excelente relación calidad-precio. La batería dura lo suficiente para un día completo de uso.</p>
+          <div class="mt-2">
+            <button class="text-indigo-600 hover:text-indigo-700 text-sm">¿Util?</button>
+          </div>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
+          <div class="flex items-center mb-2">
+            <img src="assets/user2.jpg" alt="Usuario 2" class="h-10 w-10 rounded-full mr-4">
+            <div>
+              <h4 class="text-lg font-bold text-black dark:text-gray-200">Usuario 2</h4>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">02/05/2025</p>
+            </div>
+          </div>
+          <p class="text-black dark:text-gray-300">El rendimiento es bueno, pero esperaba una mejor calidad de cámara.</p>
+          <div class="mt-2">
+            <button class="text-indigo-600 hover:text-indigo-700 text-sm">¿Util?</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notificaciones de Ofertas y Tendencias -->
+    <section id="notificaciones" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Notificaciones y Tendencias</h2>
+      <ul class="list-disc list-inside text-black dark:text-gray-300">
+        <li>Descuento del 20% en dispositivos seleccionados.</li>
+        <li>Nuevas tendencias en smartphones publicados hoy.</li>
+        <li>Oferta exclusiva: financiamiento 0% en Portátiles.</li>
+      </ul>
+    </section>
+
+    <!-- Integración con Plataformas de Comercio Electrónico -->
+    <section id="ecommerce" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">Plataformas de Comercio</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
+          <h3 class="text-xl font-bold text-black dark:text-gray-200">Tienda A</h3>
+          <p class="text-gray-600 dark:text-gray-400">Precio competitivo y opciones de financiamiento.</p>
+          <a href="https://tienda-a.com" target="_blank" class="mt-2 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Visitar</a>
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow">
+          <h3 class="text-xl font-bold text-black dark:text-gray-200">Tienda B</h3>
+          <p class="text-gray-600 dark:text-gray-400">Amplia variedad de dispositivos y reseñas de expertos.</p>
+          <a href="https://tienda-b.com" target="_blank" class="mt-2 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Visitar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registro de Dispositivos Actuales -->
+    <section id="dispositivos-actuales" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Mis Dispositivos Actuales</h2>
+      <form class="mb-6" onsubmit="event.preventDefault(); alert('Dispositivo agregado');">
+        <div class="flex flex-col md:flex-row gap-4">
+          <input type="text" placeholder="Nombre o modelo del dispositivo" class="flex-grow border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3" required>
+          <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded">Agregar</button>
+        </div>
+      </form>
+      <!-- Lista de dispositivos (ejemplo) -->
+      <ul class="list-disc list-inside text-black dark:text-gray-300">
+        <li>iPhone 13 Pro</li>
+        <li>Samsung Galaxy S22</li>
+      </ul>
+    </section>
+
+    <!-- Recomendaciones según Perfil de Uso -->
+    <section id="perfil-uso" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">Perfil de Uso</h2>
+      <form class="space-y-6" onsubmit="event.preventDefault(); alert('Perfil actualizado');">
+        <p class="mb-2 text-black dark:text-gray-300">Seleccione su perfil de uso:</p>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" name="perfilUso" value="trabajo" class="form-radio text-indigo-600" checked>
+            <span class="ml-2 text-black dark:text-gray-200">Trabajo</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="perfilUso" value="gaming" class="form-radio text-indigo-600">
+            <span class="ml-2 text-black dark:text-gray-200">Gaming</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="perfilUso" value="estudio" class="form-radio text-indigo-600">
+            <span class="ml-2 text-black dark:text-gray-200">Estudio</span>
+          </label>
+        </div>
+        <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">
+          Actualizar Perfil
+        </button>
+      </form>
+    </section>
+
+    <!-- Ingreso de Presupuesto Máximo -->
+    <section id="presupuesto" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Establecer Presupuesto Máximo</h2>
+      <form class="space-y-6" onsubmit="event.preventDefault(); alert('Presupuesto actualizado');">
+        <div>
+          <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Presupuesto Máximo ($)</label>
+          <input type="number" placeholder="Ej. 500" min="1" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">
+          Actualizar Presupuesto
+        </button>
+      </form>
     </section>
 
     <!-- Política de Privacidad -->
     <section id="privacidad" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
       <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">Política de Privacidad</h2>
       <p class="mb-4 text-black dark:text-gray-300">
-        Esta política de privacidad describe cómo recopilamos, usamos y protegemos la información personal que nos proporciona a través de nuestro sitio web CLEJ-TECH. Al utilizar este sitio, usted acepta las prácticas descritas a continuación.
+        Esta política describe cómo se recopila, usa y protege su información personal en CLEJ-TECH.
       </p>
       <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Recopilación de Datos</h3>
       <p class="mb-4 text-black dark:text-gray-300">
-        Recopilamos datos personales que nos proporciona voluntariamente a través de nuestros formularios de registro, inicio de sesión y otros servicios. Esta información puede incluir su nombre, correo electrónico, preferencias y otros datos relevantes para la mejora de nuestros servicios.
+        Recopilamos datos personales a través de formularios de registro, preferencias y otras interacciones.
       </p>
       <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Uso de la Información</h3>
       <p class="mb-4 text-black dark:text-gray-300">
-        La información recopilada es utilizada para personalizar su experiencia, mejorar nuestros servicios, enviar notificaciones importantes y, cuando corresponda, para fines de marketing con su consentimiento. No compartimos su información personal con terceros sin su autorización expresa.
+        Los datos se utilizan para personalizar la experiencia, mejorar el sitio y enviar notificaciones relevantes, siempre bajo su consentimiento.
       </p>
-      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Seguridad y Conservación de Datos</h3>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Seguridad y Conservación</h3>
       <p class="mb-4 text-black dark:text-gray-300">
-        Implementamos medidas de seguridad técnicas y organizativas para proteger su información personal de accesos no autorizados, alteraciones, divulgación o destrucción. Conservaremos sus datos únicamente durante el tiempo necesario para cumplir con los fines para los cuales fueron recopilados.
+        Implementamos medidas de seguridad para proteger sus datos y los conservamos durante el tiempo necesario.
       </p>
       <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Derechos del Usuario</h3>
       <p class="mb-4 text-black dark:text-gray-300">
-        Usted tiene derecho a acceder, rectificar, actualizar o suprimir los datos personales que poseemos sobre usted, así como a oponerse a su tratamiento en determinadas circunstancias. Para ejercer estos derechos, comuníquese con nosotros a través de nuestro correo electrónico de soporte o mediante nuestro formulario de contacto.
+        Puede solicitar acceso, corrección o eliminación de sus datos contactándonos a través del correo <a href="mailto:info@clejtech.com" class="text-indigo-600 hover:text-indigo-700">info@clejtech.com</a>.
       </p>
-      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Eliminación de Datos de Usuario</h3>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Eliminación de Datos</h3>
       <p class="mb-4 text-black dark:text-gray-300">
-        Si desea solicitar la eliminación completa de sus datos personales de nuestros registros, envíe una solicitud a <a href="mailto:info@clejtech.com" class="text-indigo-600 hover:text-indigo-700">info@clejtech.com</a> indicando su nombre, correo electrónico y cualquier información de referencia a su cuenta. Procesaremos su solicitud en un plazo de 30 días laborales y le notificaremos una vez que sus datos hayan sido eliminados.
+        Para eliminar sus datos, envíe una solicitud con sus datos de registro y procesaremos su eliminación en un plazo de 30 días laborales.
       </p>
-      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Consentimiento y Cambios a la Política</h3>
-      <p class="mb-4 text-black dark:text-gray-300">
-        Al utilizar nuestros servicios, usted otorga su consentimiento para la recopilación y uso de su información personal según lo descrito en esta política de privacidad. Nos reservamos el derecho de modificar esta política cuando sea necesario, publicando los cambios en esta misma sección.
-      </p>
-      <p class="text-black dark:text-gray-300">
-        Fecha de última actualización: 30 de abril de 2025.
-      </p>
+      <p class="text-black dark:text-gray-300">Fecha de última actualización: 30 de abril de 2025.</p>
     </section>
   </main>
 
-  <!-- Facebook Init & Callbacks -->
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : 'YOUR_APP_ID',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v11.0'
-      });
-      FB.AppEvents.logPageView();
-    };
-    function checkFacebookLoginState() {
-      FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-          const accessToken = response.authResponse.accessToken;
-          FB.api('/me', { fields: 'id,name,email,picture' }, function(profile) {
-            fetch('/auth/facebook', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ accessToken })
-            }).then(res => res.json()).then(data => {
-              if (data.success) window.location.href = '/dashboard';
-              else alert('Error al iniciar sesión con Facebook');
-            });
-          });
-        } else console.log('Usuario no conectado a Facebook');
-      });
-    }
-  </script>
+  <!-- Opcional: Sección Recupérar Contraseña -->
+  <section id="recuperar-password" class="container mx-auto px-6 py-12 max-w-2xl">
+    <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200 text-center">Recuperar Contraseña</h2>
+    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Se ha enviado un enlace de recuperación a su correo');">
+      <div>
+        <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Correo Electrónico</label>
+        <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 rounded-lg transition">
+        Enviar Enlace de Recuperación
+      </button>
+    </form>
+  </section>
 
-  <!-- Scripts: AOS, Theme, Google SignIn -->
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // AOS
+    // Inicializar AOS
     AOS.init({ duration: 800, once: true });
-    // Theme toggle with persistence
+
+    // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const setIcon = (mode) => {
@@ -197,21 +442,86 @@
       setIcon(isDark ? 'dark' : 'light');
       localStorage.theme = isDark ? 'dark' : 'light';
     };
-    // Initialize theme
-    const stored = localStorage.theme;
-    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    const storedTheme = localStorage.theme;
+    if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       applyTheme(true);
     } else {
       applyTheme(false);
     }
-    // Toggle
-    themeToggle.addEventListener('click', () => applyTheme(!document.documentElement.classList.contains('dark')));
+    themeToggle.addEventListener('click', () => {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    });
+
+    // Voice Search
+    const voiceButton = document.getElementById('voiceSearch');
+    const searchInput = document.getElementById('searchQuery');
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = "es-ES";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      voiceButton.addEventListener('click', () => {
+        recognition.start();
+      });
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        searchInput.value = transcript;
+      };
+
+      recognition.onerror = function(event) {
+        console.error("Error de reconocimiento:", event.error);
+      };
+    } else {
+      voiceButton.style.display = 'none';
+    }
+
     // Google Sign-In
     function handleCredentialResponse(response) {
-      console.log('Token de Google:', response.credential);
+      console.log("Token de Google:", response.credential);
     }
-    google.accounts.id.initialize({ client_id: '676544046017-sd497p0gqgr75v2pa53al6qt3posrohi.apps.googleusercontent.com', callback: handleCredentialResponse });
-    google.accounts.id.renderButton(document.getElementById('googleSignInButton'), { theme: 'outline', size: 'large' });
+    google.accounts.id.initialize({
+      client_id: 'TU_CLIENT_ID_DE_GOOGLE_AQUI',
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("googleSignInButton"),
+      { theme: "outline", size: "large" }
+    );
+
+    // Facebook SDK callback
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : 'TU_APP_ID_DE_FACEBOOK_AQUI',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v11.0'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    function checkFacebookLoginState() {
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          const accessToken = response.authResponse.accessToken;
+          // Ejemplo de llamada a backend para autenticar
+          fetch('/auth/facebook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accessToken })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if(data.success) window.location.href = '/dashboard';
+            else alert('Error al iniciar sesión con Facebook');
+          });
+        } else {
+          console.log('Usuario no conectado a Facebook');
+        }
+      });
+    }
   </script>
 </body>
 </html>
