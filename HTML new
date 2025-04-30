@@ -30,6 +30,7 @@
         <a href="#opiniones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Opiniones</a>
         <a href="#ecommerce" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comercio</a>
         <a href="#seguridad" class="hover:text-indigo-600 dark:hover:text-indigo-400">Seguridad</a>
+        <a href="#privacidad" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacidad</a>
       </nav>
       <!-- Theme Toggle -->
       <button id="theme-toggle" class="ml-4 p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Toggle Light/Dark Theme">
@@ -111,7 +112,41 @@
         <!-- ... tarjetas ... -->
       </div>
     </section>
-    <!-- Resto de secciones unchanged -->
+
+    <!-- Política de Privacidad -->
+    <section id="privacidad" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6 text-black dark:text-gray-200">Política de Privacidad</h2>
+      <p class="mb-4 text-black dark:text-gray-300">
+        Esta política de privacidad describe cómo recopilamos, usamos y protegemos la información personal que nos proporciona a través de nuestro sitio web CLEJ-TECH. Al utilizar este sitio, usted acepta las prácticas descritas a continuación.
+      </p>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Recopilación de Datos</h3>
+      <p class="mb-4 text-black dark:text-gray-300">
+        Recopilamos datos personales que nos proporciona voluntariamente a través de nuestros formularios de registro, inicio de sesión y otros servicios. Esta información puede incluir su nombre, correo electrónico, preferencias y otros datos relevantes para la mejora de nuestros servicios.
+      </p>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Uso de la Información</h3>
+      <p class="mb-4 text-black dark:text-gray-300">
+        La información recopilada es utilizada para personalizar su experiencia, mejorar nuestros servicios, enviar notificaciones importantes y, cuando corresponda, para fines de marketing con su consentimiento. No compartimos su información personal con terceros sin su autorización expresa.
+      </p>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Seguridad y Conservación de Datos</h3>
+      <p class="mb-4 text-black dark:text-gray-300">
+        Implementamos medidas de seguridad técnicas y organizativas para proteger su información personal de accesos no autorizados, alteraciones, divulgación o destrucción. Conservaremos sus datos únicamente durante el tiempo necesario para cumplir con los fines para los cuales fueron recopilados.
+      </p>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Derechos del Usuario</h3>
+      <p class="mb-4 text-black dark:text-gray-300">
+        Usted tiene derecho a acceder, rectificar, actualizar o suprimir los datos personales que poseemos sobre usted, así como a oponerse a su tratamiento en determinadas circunstancias. Para ejercer estos derechos, comuníquese con nosotros a través de nuestro correo electrónico de soporte o mediante nuestro formulario de contacto.
+      </p>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Eliminación de Datos de Usuario</h3>
+      <p class="mb-4 text-black dark:text-gray-300">
+        Si desea solicitar la eliminación completa de sus datos personales de nuestros registros, envíe una solicitud a <a href="mailto:info@clejtech.com" class="text-indigo-600 hover:text-indigo-700">info@clejtech.com</a> indicando su nombre, correo electrónico y cualquier información de referencia a su cuenta. Procesaremos su solicitud en un plazo de 30 días laborales y le notificaremos una vez que sus datos hayan sido eliminados.
+      </p>
+      <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Consentimiento y Cambios a la Política</h3>
+      <p class="mb-4 text-black dark:text-gray-300">
+        Al utilizar nuestros servicios, usted otorga su consentimiento para la recopilación y uso de su información personal según lo descrito en esta política de privacidad. Nos reservamos el derecho de modificar esta política cuando sea necesario, publicando los cambios en esta misma sección.
+      </p>
+      <p class="text-black dark:text-gray-300">
+        Fecha de última actualización: 30 de abril de 2025.
+      </p>
+    </section>
   </main>
 
   <!-- Facebook Init & Callbacks -->
