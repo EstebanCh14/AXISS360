@@ -10,54 +10,192 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Google Identity Services -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <!-- CSS externo -->
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
 
-  <!-- Header -->
-  <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-30">
-    <div class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
-      <a href="#" class="flex items-center text-3xl font-bold text-indigo-600 dark:text-indigo-400">
-        <img src="assets/3.png" alt="Logo CLEJ-TECH" class="h-10 w-10 mr-2">
+  <!-- Header / Navbar -->
+  <header class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+      <a href="#" class="flex items-center text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+        <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2">
         CLEJ-TECH
       </a>
+      <nav class="hidden md:flex space-x-6 font-medium">
+        <a href="#inicio" class="hover:text-indigo-600 dark:hover:text-indigo-400">Inicio</a>
+        <a href="#registro" class="hover:text-indigo-600 dark:hover:text-indigo-400">Registro</a>
+        <a href="#comparacion" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comparar</a>
+        <a href="#recomendaciones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Recomendaciones</a>
+        <a href="#opiniones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Opiniones</a>
+        <a href="#ecommerce" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comercio</a>
+        <a href="#seguridad" class="hover:text-indigo-600 dark:hover:text-indigo-400">Seguridad</a>
+      </nav>
+      <!-- Dark Mode Toggle -->
+      <button id="theme-toggle" class="ml-4 p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none">
+        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.02-.707l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 000 14a7 7 0 000-14z"/>
+        </svg>
+      </button>
     </div>
   </header>
 
-  <!-- Spinner de carga -->
-  <div id="spinner" class="mx-auto my-10"></div>
+  <!-- Hero Section -->
+  <section id="inicio" class="pt-32 pb-20 bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
+    <div class="container mx-auto text-center px-6">
+      <h1 class="text-5xl font-bold mb-4" data-aos="fade-down">Bienvenido a CLEJ-TECH</h1>
+      <p class="text-xl mb-8" data-aos="fade-up">Compara dispositivos, recibe recomendaciones personalizadas y compra con seguridad.</p>
+      <a href="#registro" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition" data-aos="zoom-in">Comienza Ahora</a>
+    </div>
+  </section>
 
-  <!-- Contenido principal -->
-  <main class="pt-32 pb-16 container mx-auto px-6 space-y-20 max-w-7xl">
-    <!-- Sección de Registro -->
-    <section id="registro" data-aos="fade-up" class="bg-white dark:bg-gray-800 p-12 rounded-xl shadow-lg">
-      <h2 class="text-4xl font-bold mb-6">Registro y Personalización de Perfil</h2>
-      <form id="registerForm" class="space-y-6 max-w-2xl">
+  <main class="container mx-auto px-6 space-y-20 max-w-6xl">
+
+    <!-- Registro & Perfil -->
+    <section id="registro" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-right">
+      <h2 class="text-3xl font-bold mb-6">1. Registro y Personalización de Perfil</h2>
+      <form class="space-y-6">
         <div>
           <label class="block text-lg font-medium mb-1">Correo Electrónico</label>
-          <input type="email" placeholder="tu@correo.com" class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <input type="email" placeholder="tu@correo.com" class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 dark:text-gray-200" />
         </div>
         <div>
           <span class="block text-lg font-medium mb-1">Registrarse con</span>
-          <div class="flex space-x-4">
+          <div class="flex flex-col md:flex-row gap-4">
             <div id="googleSignInButton" class="flex-1"></div>
-            <button class="flex-1 bg-blue-800 hover:bg-blue-900 text-white py-3 rounded-lg transition btn-hover">Facebook</button>
+            <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition">Facebook</button>
           </div>
         </div>
-        <button id="submitButton" type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition btn-hover">Crear Cuenta</button>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label class="block text-lg font-medium mb-1">Marcas Favoritas</label>
+            <select multiple class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none text-gray-900 dark:text-gray-200">  
+              <option>Apple</option>
+              <option>Samsung</option>
+              <option>Xiaomi</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-lg font-medium mb-1">Presupuesto</label>
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none text-gray-900 dark:text-gray-200">
+              <option>&lt; $200</option>
+              <option>$200 - $500</option>
+              <option>&gt; $500</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-lg font-medium mb-1">Tipo de Dispositivo</label>
+            <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none text-gray-900 dark:text-gray-200">
+              <option>Smartphone</option>
+              <option>Tablet</option>
+              <option>Portátil</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition">Crear Cuenta</button>
       </form>
     </section>
+
+    <!-- Motor de Búsqueda y Comparación -->
+    <section id="comparacion" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-left">
+      <h2 class="text-3xl font-bold mb-6">2. Motor de Búsqueda y Comparación</h2>
+      <p class="mb-6">Encuentra y compara dispositivos con filtros avanzados:</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-xl transition">
+          <h3 class="font-semibold text-xl mb-2">Filtro de Precio</h3>
+          <p>Establece tu rango de precio ideal y encuentra dispositivos que se ajusten.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-xl transition">
+          <h3 class="font-semibold text-xl mb-2">Especificaciones Técnicas</h3>
+          <p>Compara CPU, RAM, batería y más para elegir el mejor rendimiento.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-xl transition">
+          <h3 class="font-semibold text-xl mb-2">Opiniones de Usuarios</h3>
+          <p>Consulta reviews reales y puntuaciones para tomar decisiones informadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recomendaciones basadas en IA -->
+    <section id="recomendaciones" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-right">
+      <h2 class="text-3xl font-bold mb-6">3. Recomendaciones Basadas en IA</h2>
+      <p class="mb-4">Nuestro algoritmo aprende de tus preferencias:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Adaptación continua según tu historial y búsquedas.</li>
+        <li>Explicación detallada de cada sugerencia.</li>
+        <li>Notificaciones personalizadas en tu panel de usuario.</li>
+      </ul>
+    </section>
+
+    <!-- Opiniones y Tendencias -->
+    <section id="opiniones" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-left">
+      <h2 class="text-3xl font-bold mb-6">4. Análisis de Opiniones y Tendencias</h2>
+      <p class="mb-4">Mantente al día con lo que otros usuarios y expertos opinan:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Reseñas destacadas y puntuaciones verificadas.</li>
+        <li>Califica comentarios para destacar lo más útil.</li>
+        <li>Tendencias en tiempo real basadas en ventas y redes sociales.</li>
+      </ul>
+    </section>
+
+    <!-- Integración Ecommerce -->
+    <section id="ecommerce" class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-right">
+      <h2 class="text-3xl font-bold mb-6">5. Integración con Comercio Electrónico</h2>
+      <p class="mb-4">Compra directamente en tiendas confiables:</p>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Enlaces a múltiples tiendas verificadas.</li>
+        <li>Comparación de precios y opciones de financiamiento.</li>
+        <li>Notificaciones de descuentos y ofertas especiales.</li>
+      </ul>
+    </section>
+
+    <!-- Seguridad y Privacidad -->
+    <section id="seguridad" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-left">
+      <h2 class="text-3xl font-bold mb-6">6. Seguridad y Privacidad</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Cifrado de datos de extremo a extremo.</li>
+        <li>Autenticación en dos pasos y gestión de sesiones.</li>
+        <li>Control completo para eliminar tu cuenta y datos.</li>
+      </ul>
+    </section>
+
   </main>
 
   <!-- Footer -->
   <footer class="bg-white dark:bg-gray-800 py-8">
-    <div class="container mx-auto text-center text-sm text-gray-600 dark:text-gray-400">
-      &copy; 2025 CLEJ-TECH. Todos los derechos reservados.
+    <div class="container mx-auto text-center text-sm text-gray-600 dark:text-gray-400 space-y-2">
+      <p>&copy; 2025 CLEJ-TECH. Todos los derechos reservados.</p>
+      <div class="space-x-4">
+        <a href="#" class="hover:text-indigo-600">Términos</a>
+        <a href="#" class="hover:text-indigo-600">Privacidad</a>
+        <a href="#" class="hover:text-indigo-600">Contacto</a>
+      </div>
     </div>
   </footer>
 
-  <!-- Scripts externo -->
-  <script src="scripts.js"></script>
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+    themeToggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+    });
+
+    // Google Sign-In
+    function handleCredentialResponse(response) {
+      console.log('Token de Google:', response.credential);
+      // Aquí podrías enviar el token al servidor para validarlo o crear una sesión
+    }
+    google.accounts.id.initialize({
+      client_id: '676544046017-sd497p0gqgr75v2pa53al6qt3posrohi.apps.googleusercontent.com',
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById('googleSignInButton'),
+      { theme: 'outline', size: 'large' }
+    );
+  </script>
 </body>
 </html>
