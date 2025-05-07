@@ -13,49 +13,46 @@
     <!-- Facebook SDK -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js"></script>
   </head>
-  <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
+  <body class="bg-gray-50 text-black transition-colors duration-500">
     
     <!-- HEADER / NAVBAR -->
-    <header class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
+    <header class="fixed w-full bg-white shadow-md z-50">
       <div class="container mx-auto flex items-center justify-between py-4 px-6">
         <!-- Logo -->
-        <a href="#inicio" class="flex items-center text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+        <a href="#inicio" class="flex items-center text-2xl font-extrabold text-indigo-600">
           <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2" />
           CLEJ-TECH
         </a>
-        <!-- Menú simplificado -->
+        <!-- Menú simplificado (se elimina Registro) -->
         <nav class="hidden md:flex space-x-4 font-medium text-sm">
-          <a href="#inicio" class="hover:text-indigo-600 dark:hover:text-indigo-400">Inicio</a>
-          <a href="#registro" class="hover:text-indigo-600 dark:hover:text-indigo-400">Registro</a>
-          <a href="#opiniones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Opiniones</a>
-          <a href="#ecommerce" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comercio</a>
+          <a href="#inicio" class="hover:text-indigo-600">Inicio</a>
+          <a href="#opiniones" class="hover:text-indigo-600">Opiniones</a>
+          <a href="#ecommerce" class="hover:text-indigo-600">Comercio</a>
         </nav>
         <!-- Botones de acciones -->
         <div class="flex items-center">
           <!-- Botón de búsqueda -->
-          <button id="search-toggle" class="mr-2 p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Buscar">
+          <button id="search-toggle" class="mr-2 p-2 bg-gray-200 rounded-full focus:outline-none" aria-label="Buscar">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
             </svg>
           </button>
-          <!-- Botón de notificaciones (campanita) -->
-          <button id="notifications-toggle" class="mr-2 p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Notificaciones">
+          <!-- Botón de notificaciones -->
+          <button id="notifications-toggle" class="mr-2 p-2 bg-gray-200 rounded-full focus:outline-none" aria-label="Notificaciones">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C8.67 6.165 8 7.388 8 8.75v5.408c0 .538-.214 1.055-.595 1.436L6 17h5m4 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
           </button>
-          <!-- Botón de filtros (embudo) -->
-          <button id="filter-toggle" class="mr-2 p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Filtros">
+          <!-- Botón de filtros -->
+          <button id="filter-toggle" class="mr-2 p-2 bg-gray-200 rounded-full focus:outline-none" aria-label="Filtros">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V19a1 1 0 01-1 1h-2a1 1 0 01-1-1v-5.586L3.293 6.707A1 1 0 013 6V4z" />
             </svg>
           </button>
-          <!-- Botón de cambio de tema -->
-          <button id="theme-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Toggle Light/Dark Theme">
-            <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-              <!-- Se actualizará mediante JS -->
-            </svg>
-          </button>
+          <!-- Botón de INICIAR SESIÓN (nuevo) -->
+          <a href="#" id="loginButton" class="ml-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full text-sm font-medium">
+            INICIAR SESIÓN
+          </a>
         </div>
       </div>
     </header>
@@ -65,31 +62,46 @@
       <div class="container mx-auto text-center px-6">
         <h1 class="text-5xl font-bold mb-4">Bienvenido a CLEJ-TECH</h1>
         <p class="text-xl mb-8">Compara dispositivos, recibe recomendaciones personalizadas y compra con seguridad.</p>
-        <a href="#empresa" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition">
-          Comienza Ahora
+        <!-- El botón COMIENZA AHORA abre el modal y muestra el formulario de Registro -->
+        <a href="#" id="registerNowButton" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition">
+          COMIENZA AHORA
         </a>
       </div>
     </section>
 
+    <!-- MAIN CON CONTENIDO -->
     <main class="container mx-auto px-6 space-y-20 max-w-6xl">
       <!-- SECCIÓN: ACERCA DE AXISS360 -->
-      <section id="empresa" class="bg-gray-100 dark:bg-gray-700 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
-        <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Acerca de AXISS360</h2>
-        <p class="mb-4 text-black dark:text-gray-300">
+      <section id="empresa" class="bg-gray-100 p-12 rounded-2xl shadow-lg" data-aos="fade-up">
+        <h2 class="text-3xl font-bold mb-6 text-black">Acerca de AXISS360</h2>
+        <p class="mb-4 text-black">
           AXISS360 es una empresa dedicada a brindar soluciones innovadoras en tecnología y consultoría digital. Nos enfocamos en ofrecer asesoría personalizada, integración de herramientas digitales y desarrollo web profesional, adaptados a las necesidades de cada cliente.
         </p>
         <div class="mt-8">
-          <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Contacto</h3>
-          <p class="text-black dark:text-gray-300">Email: contacto@axiss360.com | Tel: +57 123 456 789</p>
+          <h3 class="text-2xl font-bold mb-2 text-black">Contacto</h3>
+          <p class="text-black">Email: contacto@axiss360.com | Tel: +57 123 456 789</p>
         </div>
         <div class="mt-8">
-          <h3 class="text-2xl font-bold mb-2 text-black dark:text-gray-200">Novedades</h3>
-          <ul class="list-disc list-inside text-black dark:text-gray-300">
+          <h3 class="text-2xl font-bold mb-2 text-black">Novedades</h3>
+          <ul class="list-disc list-inside text-black">
             <li>Actualización de la página web – Abril 2025</li>
             <li>Nuevo enfoque en soluciones digitales – Marzo 2025</li>
             <li>Lanzamiento de AXISS360 Consultoría – Febrero 2025</li>
           </ul>
         </div>
+      </section>
+
+      <!-- SECCIÓN: OPINIONES -->
+      <section id="opiniones" class="bg-white p-12 rounded-2xl shadow-lg" data-aos="fade-up" style="scroll-margin-top: 80px;">
+        <h2 class="text-3xl font-bold mb-6 text-black">Opiniones</h2>
+        <p class="mb-4 text-black">Comparte tu opinión sobre nuestra página:</p>
+        <form id="opinionesForm">
+          <textarea id="opinionText" rows="4" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Escribe tu opinión aquí..."></textarea>
+          <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition">
+            Enviar Opinión
+          </button>
+        </form>
+        <div id="opinionesDisplay" class="mt-6"></div>
       </section>
     </main>
 
@@ -102,13 +114,13 @@
 
     <!-- MODAL DE AUTENTICACIÓN (INICIAR SESIÓN / REGISTRARSE) -->
     <div id="modalAuth" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-md overflow-auto max-h-screen">
+      <div class="bg-white p-6 rounded-lg w-full max-w-md overflow-auto max-h-screen">
         <!-- Pestañas para Iniciar Sesión / Registrarse -->
         <div class="flex justify-around mb-4 border-b border-gray-300">
           <button id="tabLogin" class="text-xl font-bold px-4 py-2 text-indigo-600 border-b-2 border-indigo-600">
             Iniciar Sesión
           </button>
-          <button id="tabRegister" class="text-xl font-bold px-4 py-2 text-gray-500">
+          <button id="tabRegister" class="text-xl font-bold px-4 py-2 text-black">
             Registrarse
           </button>
         </div>
@@ -116,12 +128,12 @@
         <!-- Formulario de Iniciar Sesión -->
         <form id="formLogin">
           <div class="mb-4">
-            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Correo Electrónico</label>
-            <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-lg font-medium mb-1 text-black">Correo Electrónico</label>
+            <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
           </div>
           <div class="mb-4">
-            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Contraseña</label>
-            <input type="password" placeholder="Tu contraseña" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-lg font-medium mb-1 text-black">Contraseña</label>
+            <input type="password" placeholder="Tu contraseña" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
           </div>
           <!-- Botón para RECUPERACIÓN de contraseña -->
           <div class="mb-4">
@@ -133,7 +145,7 @@
             Iniciar Sesión
           </button>
           <div class="mt-4 text-center">
-            <span class="text-gray-600 dark:text-gray-300">
+            <span class="text-black">
               ¿No tienes cuenta? <button type="button" id="showRegister" class="text-indigo-600 hover:text-indigo-700">Registrarse</button>
             </span>
           </div>
@@ -142,24 +154,24 @@
         <!-- Formulario de Registro -->
         <form id="formRegister" class="hidden">
           <div class="mb-4">
-            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Correo Electrónico</label>
-            <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-lg font-medium mb-1 text-black">Correo Electrónico</label>
+            <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
           </div>
           <div class="mb-4">
-            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Contraseña</label>
+            <label class="block text-lg font-medium mb-1 text-black">Contraseña</label>
             <input type="password" placeholder="Contraseña segura" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
               title="Mínimo 8 caracteres, 1 número, 1 mayúscula y 1 minúscula" 
-              class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
           </div>
           <div class="mb-4">
-            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Confirmar Contraseña</label>
-            <input type="password" placeholder="Confirmar contraseña" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-lg font-medium mb-1 text-black">Confirmar Contraseña</label>
+            <input type="password" placeholder="Confirmar contraseña" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
           </div>
-          <!-- Checkbox de aceptación de Términos y Condiciones y Política de Privacidad -->
+          <!-- Checkbox de aceptación de Términos y Condiciones -->
           <div class="mb-4">
             <label class="inline-flex items-center">
               <input type="checkbox" id="termsCheckbox" class="form-checkbox text-indigo-600">
-              <span class="ml-2 text-black dark:text-gray-200">
+              <span class="ml-2 text-black">
                 Acepto los 
                 <button type="button" id="openTerms" class="underline text-indigo-600 hover:text-indigo-700">Términos y Condiciones</button> 
                 y la 
@@ -171,27 +183,27 @@
             Crear Cuenta
           </button>
           <div class="mt-4 text-center">
-            <span class="text-gray-600 dark:text-gray-300">
+            <span class="text-black">
               ¿Ya tienes cuenta? <button type="button" id="showLogin" class="text-indigo-600 hover:text-indigo-700">Iniciar Sesión</button>
             </span>
           </div>
         </form>
 
-        <button id="closeAuth" class="mt-4 text-gray-500 hover:text-gray-700">Cerrar</button>
+        <button id="closeAuth" class="mt-4 text-black hover:text-black">Cerrar</button>
       </div>
     </div>
 
     <!-- MODAL DE RECUPERACIÓN DE CONTRASEÑA -->
     <div id="modalPasswordRecovery" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-md overflow-auto">
+      <div class="bg-white p-6 rounded-lg w-full max-w-md overflow-auto">
         <div class="flex justify-end">
-          <button id="closePasswordRecovery" class="text-gray-500 hover:text-gray-700">Cerrar</button>
+          <button id="closePasswordRecovery" class="text-black hover:text-black">Cerrar</button>
         </div>
-        <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Recuperar Contraseña</h2>
+        <h2 class="text-2xl font-bold mb-4 text-black">Recuperar Contraseña</h2>
         <form id="formPasswordRecovery" onsubmit="event.preventDefault(); alert('Se ha enviado un enlace de recuperación a su correo');">
           <div class="mb-4">
-            <label class="block text-lg font-medium mb-1 text-black dark:text-gray-200">Correo Electrónico</label>
-            <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <label class="block text-lg font-medium mb-1 text-black">Correo Electrónico</label>
+            <input type="email" placeholder="tu@correo.com" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
           </div>
           <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 rounded-lg transition">
             Enviar Enlace de Recuperación
@@ -202,22 +214,22 @@
 
     <!-- MODAL DE BÚSQUEDA -->
     <div id="modalSearch" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden z-50">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-4xl overflow-auto max-h-screen">
+      <div class="bg-white p-6 rounded-lg w-full max-w-4xl overflow-auto max-h-screen">
         <div class="flex justify-end">
-          <button id="closeSearch" class="text-gray-500 hover:text-gray-700">Cerrar</button>
+          <button id="closeSearch" class="text-black hover:text-black">Cerrar</button>
         </div>
-        <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Búsqueda de Dispositivos</h2>
+        <h2 class="text-3xl font-bold mb-6 text-black">Búsqueda de Dispositivos</h2>
         <form class="mb-8" onsubmit="event.preventDefault(); alert('Buscando...');">
           <div class="flex items-center">
-            <input type="text" id="searchQuery" placeholder="Buscar dispositivo..." class="flex-grow border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3" />
+            <input type="text" id="searchQuery" placeholder="Buscar dispositivo..." class="flex-grow border border-gray-300 rounded-lg px-4 py-3" />
             <button type="button" id="voiceSearch" class="ml-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded">🎤</button>
             <button type="submit" class="ml-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded">Buscar</button>
           </div>
           <!-- Filtros avanzados en la búsqueda -->
           <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label class="block text-black dark:text-gray-200">Marca</label>
-              <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3">
+              <label class="block text-black">Marca</label>
+              <select class="w-full border border-gray-300 rounded-lg px-4 py-3">
                 <option value="">Todas</option>
                 <option>Apple</option>
                 <option>Samsung</option>
@@ -225,8 +237,8 @@
               </select>
             </div>
             <div>
-              <label class="block text-black dark:text-gray-200">Precio</label>
-              <select class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3">
+              <label class="block text-black">Precio</label>
+              <select class="w-full border border-gray-300 rounded-lg px-4 py-3">
                 <option value="">Todos</option>
                 <option value="200">&lt; $200</option>
                 <option value="200-500">$200 - $500</option>
@@ -234,27 +246,27 @@
               </select>
             </div>
             <div>
-              <label class="block text-black dark:text-gray-200">Especificaciones</label>
-              <input type="text" placeholder="Procesador, RAM, etc." class="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-3" />
+              <label class="block text-black">Especificaciones</label>
+              <input type="text" placeholder="Procesador, RAM, etc." class="w-full border border-gray-300 rounded-lg px-4 py-3" />
             </div>
           </div>
         </form>
         <!-- Resultados de búsqueda (ejemplo de tarjetas) -->
         <div id="searchResults" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <div class="bg-white p-4 rounded-lg shadow">
             <img src="assets/product1.jpg" alt="Producto 1" class="w-full h-40 object-cover rounded" />
-            <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Producto 1</h3>
-            <p class="text-gray-600 dark:text-gray-400">Descripción breve del producto.</p>
+            <h3 class="mt-4 text-xl font-bold text-black">Producto 1</h3>
+            <p class="text-black">Descripción breve del producto.</p>
           </div>
-          <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <div class="bg-white p-4 rounded-lg shadow">
             <img src="assets/product2.jpg" alt="Producto 2" class="w-full h-40 object-cover rounded" />
-            <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Producto 2</h3>
-            <p class="text-gray-600 dark:text-gray-400">Descripción breve del producto.</p>
+            <h3 class="mt-4 text-xl font-bold text-black">Producto 2</h3>
+            <p class="text-black">Descripción breve del producto.</p>
           </div>
-          <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+          <div class="bg-white p-4 rounded-lg shadow">
             <img src="assets/product3.jpg" alt="Producto 3" class="w-full h-40 object-cover rounded" />
-            <h3 class="mt-4 text-xl font-bold text-black dark:text-gray-200">Producto 3</h3>
-            <p class="text-gray-600 dark:text-gray-400">Descripción breve del producto.</p>
+            <h3 class="mt-4 text-xl font-bold text-black">Producto 3</h3>
+            <p class="text-black">Descripción breve del producto.</p>
           </div>
         </div>
       </div>
@@ -262,39 +274,39 @@
 
     <!-- MODAL DE FILTROS -->
     <div id="modalFilter" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden z-50">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-md overflow-auto max-h-screen">
+      <div class="bg-white p-6 rounded-lg w-full max-w-md overflow-auto max-h-screen">
         <div class="flex justify-end">
-          <button id="closeFilter" class="text-gray-500 hover:text-gray-700">Cerrar</button>
+          <button id="closeFilter" class="text-black hover:text-black">Cerrar</button>
         </div>
-        <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Filtros Adicionales</h2>
+        <h2 class="text-2xl font-bold mb-4 text-black">Filtros Adicionales</h2>
         <ul class="space-y-4">
           <li>
-            <a href="#recomendaciones" class="block p-3 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
+            <a href="#recomendaciones" class="block p-3 bg-gray-100 rounded hover:bg-gray-200 text-black">
               Recomendaciones
             </a>
           </li>
           <li>
-            <a href="#comparacion-productos" class="block p-3 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
+            <a href="#comparacion-productos" class="block p-3 bg-gray-100 rounded hover:bg-gray-200 text-black">
               Comparación
             </a>
           </li>
           <li>
-            <a href="#dispositivos-actuales" class="block p-3 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
+            <a href="#dispositivos-actuales" class="block p-3 bg-gray-100 rounded hover:bg-gray-200 text-black">
               Mis Dispositivos
             </a>
           </li>
           <li>
-            <a href="#perfil-uso" class="block p-3 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
+            <a href="#perfil-uso" class="block p-3 bg-gray-100 rounded hover:bg-gray-200 text-black">
               Perfil de Uso
             </a>
           </li>
           <li>
-            <a href="#presupuesto" class="block p-3 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
+            <a href="#presupuesto" class="block p-3 bg-gray-100 rounded hover:bg-gray-200 text-black">
               Presupuesto
             </a>
           </li>
           <li>
-            <a href="#privacidad" class="block p-3 bg-gray-100 dark:bg-gray-700 rounded hover:bg-gray-200 dark:hover:bg-gray-600">
+            <a href="#privacidad" class="block p-3 bg-gray-100 rounded hover:bg-gray-200 text-black">
               Privacidad
             </a>
           </li>
@@ -304,50 +316,50 @@
 
     <!-- MODAL DE POLÍTICAS DE PRIVACIDAD (Scrollable) -->
     <div id="modalPrivacy" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto">
+      <div class="bg-white p-6 rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto">
         <div class="flex justify-end">
-          <button id="closePrivacy" class="text-gray-500 hover:text-gray-700">Cerrar</button>
+          <button id="closePrivacy" class="text-black hover:text-black">Cerrar</button>
         </div>
-        <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Políticas de Privacidad</h2>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <h2 class="text-2xl font-bold mb-4 text-black">Políticas de Privacidad</h2>
+        <p class="mb-4 text-black">
           Esta política describe cómo se recopila, usa y protege su información personal en CLEJ-TECH. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt, nunc in condimentum ultrices, elit mi mattis libero, nec vulputate nunc tellus non nisl. Integer consequat sapien non leo facilisis, sed aliquet nisl iaculis.
         </p>
-        <h3 class="text-xl font-bold mb-2 text-black dark:text-gray-200">Recopilación de Datos</h3>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <h3 class="text-xl font-bold mb-2 text-black">Recopilación de Datos</h3>
+        <p class="mb-4 text-black">
           Recopilamos datos personales a través de formularios de registro, preferencias y otras interacciones. Phasellus fringilla, tortor eget dictum iaculis, tellus quam luctus justo, et vulputate sapien risus in risus.
         </p>
-        <h3 class="text-xl font-bold mb-2 text-black dark:text-gray-200">Uso de la Información</h3>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <h3 class="text-xl font-bold mb-2 text-black">Uso de la Información</h3>
+        <p class="mb-4 text-black">
           Los datos se utilizan para personalizar la experiencia, mejorar el sitio y enviar notificaciones relevantes, siempre bajo su consentimiento.
         </p>
-        <h3 class="text-xl font-bold mb-2 text-black dark:text-gray-200">Seguridad y Conservación</h3>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <h3 class="text-xl font-bold mb-2 text-black">Seguridad y Conservación</h3>
+        <p class="mb-4 text-black">
           Implementamos medidas de seguridad para proteger sus datos y los conservamos durante el tiempo necesario.
         </p>
-        <h3 class="text-xl font-bold mb-2 text-black dark:text-gray-200">Derechos del Usuario</h3>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <h3 class="text-xl font-bold mb-2 text-black">Derechos del Usuario</h3>
+        <p class="mb-4 text-black">
           Puede solicitar acceso, corrección o eliminación de sus datos contactándonos a través del correo 
           <a href="mailto:info@clejtech.com" class="text-indigo-600 hover:text-indigo-700">info@clejtech.com</a>.
         </p>
-        <h3 class="text-xl font-bold mb-2 text-black dark:text-gray-200">Eliminación de Datos</h3>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <h3 class="text-xl font-bold mb-2 text-black">Eliminación de Datos</h3>
+        <p class="mb-4 text-black">
           Para eliminar sus datos, envíe una solicitud con sus datos de registro y procesaremos su eliminación en un plazo de 30 días laborales.
         </p>
-        <p class="text-black dark:text-gray-300">Fecha de última actualización: 30 de abril de 2025.</p>
+        <p class="text-black">Fecha de última actualización: 30 de abril de 2025.</p>
       </div>
     </div>
 
     <!-- MODAL DE TÉRMINOS Y CONDICIONES -->
     <div id="modalTerms" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-md overflow-auto">
+      <div class="bg-white p-6 rounded-lg w-full max-w-md overflow-auto">
         <div class="flex justify-end">
-          <button id="closeTerms" class="text-gray-500 hover:text-gray-700">Cerrar</button>
+          <button id="closeTerms" class="text-black hover:text-black">Cerrar</button>
         </div>
-        <h2 class="text-2xl font-bold mb-4 text-black dark:text-white">Términos y Condiciones</h2>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <h2 class="text-2xl font-bold mb-4 text-black">Términos y Condiciones</h2>
+        <p class="mb-4 text-black">
           Aquí se presentan los términos y condiciones del servicio. Al continuar con el registro, aceptas cumplir con estos términos.
         </p>
-        <p class="mb-4 text-black dark:text-gray-300">
+        <p class="mb-4 text-black">
           [Aquí se detalla toda la información legal y de uso del servicio...]
         </p>
       </div>
@@ -359,30 +371,6 @@
       // Inicializar AOS
       AOS.init({ duration: 800, once: true });
       
-      // Theme Toggle
-      const themeToggle = document.getElementById("theme-toggle");
-      const themeIcon = document.getElementById("theme-icon");
-      const setIcon = (mode) => {
-        themeIcon.innerHTML =
-          mode === "dark"
-            ? '<path d="M10 2a8 8 0 017.446 5.032A9 9 0 1110 2z" />'
-            : '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16a8 8 0 000 16z" clip-rule="evenodd" />';
-      };
-      const applyTheme = (isDark) => {
-        document.documentElement.classList.toggle("dark", isDark);
-        setIcon(isDark ? "dark" : "light");
-        localStorage.theme = isDark ? "dark" : "light";
-      };
-      const storedTheme = localStorage.theme;
-      if (storedTheme === "dark" || (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        applyTheme(true);
-      } else {
-        applyTheme(false);
-      }
-      themeToggle.addEventListener("click", () => {
-        applyTheme(!document.documentElement.classList.contains("dark"));
-      });
-
       // Voice Search
       const voiceButton = document.getElementById("voiceSearch");
       const searchInput = document.getElementById("searchQuery");
@@ -411,7 +399,7 @@
         console.log("Token de Google:", response.credential);
       }
       google.accounts.id.initialize({
-        client_id: "TU_CLIENT_ID_DE_GOOGLE_AQUI",
+        client_id: "TU_CLIENT_ID_DE_GOOGLE_AQUI", // Actualiza con tu Client ID real si es necesario
         callback: handleCredentialResponse,
       });
       google.accounts.id.renderButton(
@@ -464,25 +452,34 @@
         formRegister.classList.add("hidden");
         tabLogin.classList.add("text-indigo-600", "border-b-2", "border-indigo-600");
         tabRegister.classList.remove("text-indigo-600", "border-b-2", "border-indigo-600");
-        tabRegister.classList.add("text-gray-500");
+        tabRegister.classList.add("text-black");
       }
       function showRegisterForm() {
         formRegister.classList.remove("hidden");
         formLogin.classList.add("hidden");
         tabRegister.classList.add("text-indigo-600", "border-b-2", "border-indigo-600");
         tabLogin.classList.remove("text-indigo-600", "border-b-2", "border-indigo-600");
-        tabLogin.classList.add("text-gray-500");
+        tabLogin.classList.add("text-black");
       }
-      // Inicializamos mostrando el formulario de inicio de sesión
-      showLoginForm();
-      tabLogin.addEventListener("click", showLoginForm);
-      tabRegister.addEventListener("click", showRegisterForm);
-      showRegister && showRegister.addEventListener("click", showRegisterForm);
-      showLogin && showLogin.addEventListener("click", showLoginForm);
-      document.querySelector('a[href="#registro"]').addEventListener("click", function (e) {
+
+      // Asignar eventos para abrir el modal con la pestaña deseada
+      document.getElementById("registerNowButton").addEventListener("click", function (e) {
         e.preventDefault();
+        showRegisterForm();
         modalAuth.classList.remove("hidden");
       });
+      document.getElementById("loginButton").addEventListener("click", function (e) {
+        e.preventDefault();
+        showLoginForm();
+        modalAuth.classList.remove("hidden");
+      });
+
+      // También se mantiene el cambio por los botones dentro del modal
+      showLogin && showLogin.addEventListener("click", showLoginForm);
+      showRegister && showRegister.addEventListener("click", showRegisterForm);
+
+      // Se remueve el listener que abría el modal desde el link "registro" (ya no existe ese link)
+
       closeAuth.addEventListener("click", function () {
         modalAuth.classList.add("hidden");
       });
@@ -493,7 +490,6 @@
       });
       formRegister.addEventListener("submit", function (e) {
         e.preventDefault();
-        // Validar que se haya marcado el checkbox de Términos y Condiciones
         const termsAccepted = document.getElementById("termsCheckbox").checked;
         if (!termsAccepted) {
           alert("Debe aceptar los Términos y Condiciones y la Política de Privacidad para continuar.");
@@ -536,13 +532,13 @@
         modalFilter.classList.add("hidden");
       });
 
-      // Botón de Notificaciones (simula acción)
+      // Botón de Notificaciones
       const notificationsToggle = document.getElementById("notifications-toggle");
       notificationsToggle.addEventListener("click", function () {
         alert("No tiene notificaciones nuevas.");
       });
 
-      // Modal de Políticas de Privacidad (desde el footer y desde el registro)
+      // Modal de Políticas de Privacidad (desde el footer)
       const openPrivacyModal = document.getElementById("openPrivacyModal");
       const modalPrivacy = document.getElementById("modalPrivacy");
       const closePrivacy = document.getElementById("closePrivacy");
@@ -553,7 +549,7 @@
         modalPrivacy.classList.add("hidden");
       });
       const openPrivacy2 = document.getElementById("openPrivacy2");
-      openPrivacy2.addEventListener("click", function () {
+      openPrivacy2 && openPrivacy2.addEventListener("click", function () {
         modalPrivacy.classList.remove("hidden");
       });
 
@@ -566,6 +562,25 @@
       });
       closeTerms.addEventListener("click", function () {
         modalTerms.classList.add("hidden");
+      });
+
+      // Manejo del formulario de Opiniones
+      const opinionesForm = document.getElementById("opinionesForm");
+      opinionesForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const opinionText = document.getElementById("opinionText").value.trim();
+        if (opinionText === "") {
+          alert("Por favor, escribe tu opinión antes de enviar.");
+          return;
+        }
+        // Crear un nuevo elemento para mostrar la opinión
+        const nuevaOpinion = document.createElement("p");
+        nuevaOpinion.classList.add("mb-2", "text-black");
+        nuevaOpinion.textContent = opinionText;
+        // Agregar la nueva opinión al contenedor de opiniones
+        document.getElementById("opinionesDisplay").appendChild(nuevaOpinion);
+        // Limpiar el textarea
+        document.getElementById("opinionText").value = "";
       });
     </script>
   </body>
