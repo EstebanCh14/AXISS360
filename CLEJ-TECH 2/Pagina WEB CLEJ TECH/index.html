@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLEJ-TECH - AXISS360</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Facebook SDK -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js"></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 text-black dark:text-white transition-colors duration-500">
+    <!-- HEADER / NAVBAR -->
+    <header class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
+      <div class="container mx-auto flex items-center justify-between py-4 px-6">
+        <!-- Logo -->
+        <a href="#inicio" class="flex items-center text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+          <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2" />
+          CLEJ-TECH
+        </a>
+        <!-- Menú principal -->
+        <nav class="hidden md:flex space-x-4 font-medium text-sm">
+          <a href="#inicio" class="hover:text-indigo-600 dark:hover:text-indigo-400">Inicio</a>
+          <a href="#opiniones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Opiniones</a>
+          <!-- Enlace actualizado a la página de productos completa -->
+          <a href="productos.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Productos</a>
+          <button id="axissInfoBtn" class="hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none">AXISS360</button>
+        </nav>
+        <!-- Acciones: búsqueda, comparación, historial, autenticación -->
+        <div class="flex items-center space-x-2">
+          <select id="currencySwitch" class="bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-full p-2">
+            <option value="COP" selected>COP</option>
+            <option value="USD">USD</option>
+          </select>
+          <button id="search-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
+            </svg>
+          </button>
+          <button id="notifications-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Notificaciones">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C8.67 6.165 8 7.388 8 8.75v5.408c0 .538-.214 1.055-.595 1.436L6 17h5m4 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </button>
+          <button id="filter-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Filtros">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V19a1 1 0 01-1 1h-2a1 1 0 01-1-1v-5.586L3.293 6.707A1 1 0 013 6V4z" />
+            </svg>
+          </button>
+          <a href="payment.html" id="cartButton" class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1 2M17 13l1 2M5 21h2a2 2 0 002-2H7a2 2 0 00-2-2zm10 0h2a2 2 0 002-2h-2a2 2 0 00-2-2h-2" />
+            </svg>
+            <span id="cartCount" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+          </a>
+          <a href="#" id="compareButton" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-full text-sm font-medium">
+            Comparar
+          </a>
+          <a href="#" id="historyButton" class="bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-full text-sm font-medium">
+            Historial
+          </a>
+          <a href="#" id="loginButton" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full text-sm font-medium">
+            INICIAR SESIÓN
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MODALES GENERALES -->
+    <!-- Modal de Búsqueda Avanzada con Filtros Dinámicos -->
+    <div id="modalSearch" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-full max-w-md">
+        <button id="closeSearch" class="mb-4 text-right w-full">Cerrar</button>
+        <form id="advancedSearchForm" class="space-y-4">
+          <input id="searchQuery" type="text" placeholder="Buscar..." class="w-full p-2 border rounded" />
+          <div class="flex space-x-2">
+            <input id="minPrice" type="number" placeholder="Precio Mínimo (USD)" class="w-1/2 p-2 border rounded" />
+            <input id="maxPrice" type="number" placeholder="Precio Máximo (USD)" class="w-1/2 p-2 border rounded" />
+          </div>
+          <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded">
+            Buscar Avanzada
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Modal Filtros (simplificado) -->
+    <div id="modalFilter" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg">
+        <button id="closeFilter" class="mb-4">Cerrar</button>
+        <p>Filtro de productos aquí</p>
+      </div>
+    </div>
+    <!-- Modal Políticas de Privacidad -->
+    <div id="modalPrivacy" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md">
+        <button id="closePrivacy" class="mb-4">Cerrar</button>
+        <h2 class="text-xl font-bold mb-2">Políticas de Privacidad</h2>
+        <p>Aquí van las políticas...</p>
+      </div>
+    </div>
+    <!-- Modal AXISS360 INFO -->
+    <div id="axissModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-lg w-full relative">
+        <button id="closeAxissModal" class="absolute top-4 right-4 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" 
+                stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <h2 class="text-2xl font-bold mb-4">Acerca de AXISS360</h2>
+        <p class="mb-4">AXISS360 es una empresa dedicada a brindar soluciones innovadoras en tecnología y consultoría digital...</p>
+        <p><strong>Email:</strong> contacto@axiss360.com</p>
+        <p><strong>Teléfono:</strong> +57 123 456 789</p>
+      </div>
+    </div>
+
+    <!-- MODALES DE AUTENTICACIÓN -->
+    <!-- Modal de Inicio de Sesión Mejorado -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity">
+      <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 sm:p-10 max-w-md w-full relative transform transition-all duration-300 scale-95">
+        <button id="closeLogin" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
+                viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <h2 class="text-center text-3xl font-bold text-indigo-600 mb-6">Bienvenido</h2>
+        <form id="loginForm" class="space-y-6">
+          <div>
+            <label for="loginEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="loginEmail" placeholder="Correo electrónico" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="loginPassword" class="sr-only">Contraseña</label>
+            <input type="password" id="loginPassword" placeholder="Contraseña" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-green-700 text-white font-medium py-3 rounded-lg transition-colors hover:from-green-600 hover:to-green-800">
+            Iniciar Sesión
+          </button>
+        </form>
+        <p class="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
+          ¿No tienes cuenta? <a href="#" id="openRegisterFromLogin" class="text-indigo-600 hover:underline font-medium">Regístrate</a>
+        </p>
+      </div>
+    </div>
+    <!-- Modal de Registro Mejorado -->
+    <div id="registerModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity">
+      <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 sm:p-10 max-w-md w-full relative transform transition-all duration-300 scale-95">
+        <button id="closeRegister" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
+                viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <h2 class="text-center text-3xl font-bold text-indigo-600 mb-6">Crear Cuenta</h2>
+        <form id="registerForm" class="space-y-6">
+          <div>
+            <label for="registerName" class="sr-only">Nombre completo</label>
+            <input type="text" id="registerName" placeholder="Nombre completo" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="registerEmail" class="sr-only">Correo electrónico</label>
+            <input type="email" id="registerEmail" placeholder="Correo electrónico" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label for="registerPassword" class="sr-only">Contraseña</label>
+            <input type="password" id="registerPassword" placeholder="Contraseña" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium py-3 rounded-lg transition-colors hover:from-blue-600 hover:to-indigo-700">
+            Registrarse
+          </button>
+        </form>
+        <p class="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
+          ¿Ya tienes una cuenta? <a href="#" id="openLoginFromRegister" class="text-indigo-600 hover:underline font-medium">Inicia Sesión</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Modal de Comparación -->
+    <div id="compareModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-3xl w-full relative overflow-auto">
+        <button id="closeCompare" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
+                viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <h2 class="text-center text-2xl font-bold text-indigo-600 mb-6">Comparación de Dispositivos</h2>
+        <div id="compareContent" class="overflow-x-auto">
+          <p class="text-center">No hay productos para comparar.</p>
+        </div>
+        <button onclick="clearCompare()" class="mt-4 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">Limpiar Comparación</button>
+      </div>
+    </div>
+
+    <!-- Modal de Historial y Favoritos -->
+    <div id="historyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-3xl w-full relative overflow-auto">
+        <button id="closeHistory" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <h2 class="text-center text-2xl font-bold text-indigo-600 mb-6">Historial y Favoritos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Historial de Búsqueda</h3>
+            <ul id="searchHistoryList" class="list-disc pl-5 text-gray-700 dark:text-gray-300"></ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Productos Guardados</h3>
+            <ul id="favoritesList" class="list-disc pl-5 text-gray-700 dark:text-gray-300"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN INICIO -->
+    <section id="inicio" class="pt-32 pb-20 bg-gradient-to-r from-indigo-500 to-purple-500 text-white" data-aos="fade-down">
+      <div class="container mx-auto text-center px-6">
+        <h1 class="text-5xl font-bold mb-4">Bienvenido a CLEJ-TECH</h1>
+        <p class="text-xl mb-8">Compara dispositivos, recibe recomendaciones personalizadas y compra con seguridad.</p>
+        <a href="#" id="registerNowButton" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition">
+          COMIENZA AHORA
+        </a>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS (Todos los Productos) -->
+    <section id="productos" class="container mx-auto px-6 py-20">
+      <h2 class="text-4xl font-bold text-center mb-10">Productos Destacados</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Producto 1 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up">
+          <img src="assets/samsung_s22.jpg" alt="Samsung Galaxy S22" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy S22</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="849"></p>
+          <button onclick="addToCart('Samsung Galaxy S22', 849)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+          <div class="flex space-x-2 mt-2">
+            <button onclick="addToCompare('Samsung Galaxy S22', 849)" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs py-1 px-2 rounded">Comparar</button>
+            <button onclick="saveProduct('Samsung Galaxy S22', 849)" class="bg-purple-500 hover:bg-purple-600 text-white text-xs py-1 px-2 rounded">Guardar</button>
+          </div>
+        </div>
+        <!-- Producto 2 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/samsung_s23.jpg" alt="Samsung Galaxy S23" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy S23</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="999"></p>
+          <button onclick="addToCart('Samsung Galaxy S23', 999)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+          <div class="flex space-x-2 mt-2">
+            <button onclick="addToCompare('Samsung Galaxy S23', 999)" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs py-1 px-2 rounded">Comparar</button>
+            <button onclick="saveProduct('Samsung Galaxy S23', 999)" class="bg-purple-500 hover:bg-purple-600 text-white text-xs py-1 px-2 rounded">Guardar</button>
+          </div>
+        </div>
+        <!-- Producto 3 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/samsung_a53.jpg" alt="Samsung Galaxy A53" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy A53</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="399"></p>
+          <button onclick="addToCart('Samsung Galaxy A53', 399)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+          <div class="flex space-x-2 mt-2">
+            <button onclick="addToCompare('Samsung Galaxy A53', 399)" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs py-1 px-2 rounded">Comparar</button>
+            <button onclick="saveProduct('Samsung Galaxy A53', 399)" class="bg-purple-500 hover:bg-purple-600 text-white text-xs py-1 px-2 rounded">Guardar</button>
+          </div>
+        </div>
+        <!-- Producto 4 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/xiaomi_redmi_note11.jpg" alt="Xiaomi Redmi Note 11" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Redmi Note 11</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="249"></p>
+          <button onclick="addToCart('Xiaomi Redmi Note 11', 249)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 5 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="400">
+          <img src="assets/xiaomi_mi_11.jpg" alt="Xiaomi Mi 11" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Mi 11</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="599"></p>
+          <button onclick="addToCart('Xiaomi Mi 11', 599)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 6 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="500">
+          <img src="assets/xiaomi_poco_x3.jpg" alt="Xiaomi Poco X3" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Poco X3</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="299"></p>
+          <button onclick="addToCart('Xiaomi Poco X3', 299)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 7 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="600">
+          <img src="assets/iphone_13.jpg" alt="Apple iPhone 13" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Apple iPhone 13</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="899"></p>
+          <button onclick="addToCart('Apple iPhone 13', 899)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 8 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="700">
+          <img src="assets/iphone_se.jpg" alt="Apple iPhone SE" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Apple iPhone SE</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="399"></p>
+          <button onclick="addToCart('Apple iPhone SE', 399)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 9 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="800">
+          <img src="assets/oneplus_10_pro.jpg" alt="OnePlus 10 Pro" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">OnePlus 10 Pro</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="799"></p>
+          <button onclick="addToCart('OnePlus 10 Pro', 799)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 10 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="900">
+          <img src="assets/moto_g_power.jpg" alt="Motorola Moto G Power" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Motorola Moto G Power</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="249"></p>
+          <button onclick="addToCart('Motorola Moto G Power', 249)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 11 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="1000">
+          <img src="assets/sony_xperia_5.jpg" alt="Sony Xperia 5" class="w-full h-48 object-cover rounded" />
+          <h3 class="mt-6 text-xl font-bold">Sony Xperia 5</h3>
+          <p class="mt-2 price" data-usd="799"></p>
+          <button onclick="addToCart('Sony Xperia 5', 799)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+        <!-- Producto 12 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="1100">
+          <img src="assets/pixel_6.jpg" alt="Google Pixel 6" class="w-full h-48 object-cover rounded" />
+          <h3 class="mt-6 text-xl font-bold">Google Pixel 6</h3>
+          <p class="mt-2 price" data-usd="699"></p>
+          <button onclick="addToCart('Google Pixel 6', 699)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">Agregar al Carrito</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: RESEÑAS DE USUARIOS Y EXPERTOS -->
+    <section id="reviews" class="container mx-auto px-6 py-20 bg-gray-50 dark:bg-gray-800">
+      <h2 class="text-4xl font-bold text-center mb-10 text-indigo-600">Reseñas de Usuarios y Expertos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <!-- Reseñas de Usuarios -->
+        <div>
+          <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Reseñas de Usuarios</h3>
+          <div class="space-y-6">
+            <div class="p-4 border rounded-lg shadow bg-white dark:bg-gray-700">
+              <p class="text-gray-800 dark:text-gray-200">¡Me encanta el Samsung Galaxy S22! La calidad de la cámara y el rendimiento son excepcionales.</p>
+              <div class="flex items-center mt-2">
+                <span class="text-yellow-500">★★★★★</span>
+                <button class="ml-auto text-sm text-indigo-600 hover:underline">Calificar</button>
+              </div>
+            </div>
+            <div class="p-4 border rounded-lg shadow bg-white dark:bg-gray-700">
+              <p class="text-gray-800 dark:text-gray-200">El Xiaomi Mi 11 ofrece una excelente relación calidad-precio. Muy satisfecho con mi compra.</p>
+              <div class="flex items-center mt-2">
+                <span class="text-yellow-500">★★★★☆</span>
+                <button class="ml-auto text-sm text-indigo-600 hover:underline">Calificar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Reseñas de Expertos -->
+        <div>
+          <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Reseñas de Expertos</h3>
+          <div class="space-y-6">
+            <div class="p-4 border rounded-lg shadow bg-white dark:bg-gray-700">
+              <p class="text-gray-800 dark:text-gray-200">Según las pruebas, el Apple iPhone 13 supera en rendimiento a muchos de sus competidores.</p>
+              <div class="flex items-center mt-2">
+                <span class="text-yellow-500">★★★★★</span>
+                <button class="ml-auto text-sm text-indigo-600 hover:underline">Calificar</button>
+              </div>
+            </div>
+            <div class="p-4 border rounded-lg shadow bg-white dark:bg-gray-700">
+              <p class="text-gray-800 dark:text-gray-200">El OnePlus 10 Pro destaca por su velocidad de carga y diseño elegante. Un dispositivo muy completo.</p>
+              <div class="flex items-center mt-2">
+                <span class="text-yellow-500">★★★★☆</span>
+                <button class="ml-auto text-sm text-indigo-600 hover:underline">Calificar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: TENDENCIAS EN TIEMPO REAL -->
+    <section id="trends" class="container mx-auto px-6 py-20 bg-gray-100 dark:bg-gray-600">
+      <h2 class="text-4xl font-bold text-center mb-10 text-indigo-600">Tendencias en Tiempo Real</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Tendencia 1 -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow text-center">
+          <img src="assets/samsung_s23.jpg" alt="Trending Samsung Galaxy S23" class="mx-auto h-32 w-auto mb-4 rounded">
+          <h3 class="text-xl font-semibold mb-2">Samsung Galaxy S23</h3>
+          <p class="mb-2 text-gray-600 dark:text-gray-300">Altas ventas en redes sociales</p>
+          <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Trending</span>
+        </div>
+        <!-- Tendencia 2 -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow text-center">
+          <img src="assets/iphone_13.jpg" alt="Trending Apple iPhone 13" class="mx-auto h-32 w-auto mb-4 rounded">
+          <h3 class="text-xl font-semibold mb-2">Apple iPhone 13</h3>
+          <p class="mb-2 text-gray-600 dark:text-gray-300">Favorito entre expertos</p>
+          <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Trending</span>
+        </div>
+        <!-- Tendencia 3 -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow text-center">
+          <img src="assets/xiaomi_mi_11.jpg" alt="Trending Xiaomi Mi 11" class="mx-auto h-32 w-auto mb-4 rounded">
+          <h3 class="text-xl font-semibold mb-2">Xiaomi Mi 11</h3>
+          <p class="mb-2 text-gray-600 dark:text-gray-300">Consolidado en ventas</p>
+          <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Trending</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPINIONES (Sección para dejar comentarios) -->
+    <section id="opiniones" class="container mx-auto px-6 py-20">
+      <div class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up" style="scroll-margin-top: 80px;">
+        <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Opiniones</h2>
+        <form id="opinionesForm">
+          <textarea id="opinionText" rows="4" class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Escribe tu opinión aquí..."></textarea>
+          <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition">
+            Enviar Opinión
+          </button>
+        </form>
+        <div id="opinionesDisplay" class="mt-6"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: MEDIOS DE PAGO -->
+    <section id="paymentMethods" class="bg-gray-100 dark:bg-gray-700 py-8">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Medios de Pago</h2>
+        <div class="flex flex-wrap justify-center items-center gap-10">
+          <img src="assets/visa.png" alt="Visa" class="h-12 w-auto" />
+          <img src="assets/mastercard.png" alt="MasterCard" class="h-12 w-auto" />
+          <img src="assets/paypal.png" alt="PayPal" class="h-12 w-auto" />
+          <img src="assets/amex.png" alt="American Express" class="h-12 w-auto" />
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="container mx-auto px-6 py-4 text-center">
+      <button id="openPrivacyModal" class="text-indigo-600 hover:text-indigo-700 underline">
+        Políticas de Privacidad
+      </button>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Inicializar AOS
+      AOS.init({ duration: 800, once: true });
+      
+      // --- Función de conversión de precios ---
+      const conversionRate = 4000; // 1 USD = 4000 COP
+      let currentCurrency = 'COP';
+      function updatePrices() {
+        document.querySelectorAll('.price').forEach(el => {
+          const usd = parseFloat(el.dataset.usd);
+          el.textContent = currentCurrency === 'USD'
+            ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(usd)
+            : new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(usd * conversionRate);
+        });
+      }
+      document.getElementById('currencySwitch').addEventListener('change', e => {
+        currentCurrency = e.target.value;
+        updatePrices();
+      });
+      
+      // --- Funciones del Carrito ---
+      function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ name, price });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        alert('Producto agregado al carrito.');
+      }
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const badge = document.getElementById('cartCount');
+        badge.textContent = cart.length;
+        badge.style.display = cart.length ? 'block' : 'none';
+      }
+      window.addEventListener('load', () => {
+        updatePrices();
+        updateCartCount();
+      });
+      
+      // --- Búsqueda Avanzada ---
+      document.getElementById('advancedSearchForm').addEventListener('submit', advancedSearch);
+      function advancedSearch(e) {
+        e.preventDefault();
+        let query = document.getElementById('searchQuery').value.toLowerCase();
+        let minPrice = document.getElementById('minPrice').value;
+        let maxPrice = document.getElementById('maxPrice').value;
+        let history = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        history.push({ query, minPrice, maxPrice, date: new Date().toLocaleString() });
+        localStorage.setItem('searchHistory', JSON.stringify(history));
+        // Filtrar productos (para la página de productos, en este ejemplo se asumirá que la función se aplica a los productos visibles)
+        let cards = document.querySelectorAll('#productos .grid > div, #productos > div > div');
+        cards.forEach(card => {
+          let productName = (card.querySelector('h2, h3')?.innerText || "").toLowerCase();
+          let priceUSD = parseFloat(card.querySelector('.price')?.dataset.usd || 0);
+          let matchesQuery = query === "" || productName.includes(query);
+          let matchesMin = minPrice === "" || priceUSD >= parseFloat(minPrice);
+          let matchesMax = maxPrice === "" || priceUSD <= parseFloat(maxPrice);
+          card.style.display = (matchesQuery && matchesMin && matchesMax) ? "block" : "none";
+        });
+        document.getElementById('modalSearch').classList.add('hidden');
+      }
+      
+      // --- Funciones de Comparación ---
+      function addToCompare(name, price) {
+        let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+        if (!compareList.some(item => item.name === name)) {
+          compareList.push({ name, price });
+          localStorage.setItem("compareList", JSON.stringify(compareList));
+          alert("Producto añadido a la comparación.");
+        } else {
+          alert("El producto ya está en la comparación.");
+        }
+      }
+      document.getElementById('compareButton').addEventListener('click', () => {
+        let compareList = JSON.parse(localStorage.getItem("compareList")) || [];
+        let content = "<table class='min-w-full text-left'><thead><tr class='bg-gray-200 dark:bg-gray-700'><th class='px-4 py-2'>Dispositivo</th><th class='px-4 py-2'>Precio (USD)</th><th class='px-4 py-2'>Especificaciones</th><th class='px-4 py-2'>Opiniones</th></tr></thead><tbody>";
+        compareList.forEach(item => {
+          content += `<tr class="border-b"><td class="px-4 py-2">${item.name}</td><td class="px-4 py-2">${item.price}</td><td class="px-4 py-2">Especificaciones detalladas</td><td class="px-4 py-2">Opiniones de usuarios</td></tr>`;
+        });
+        content += "</tbody></table>";
+        if(compareList.length === 0){
+          content = "<p class='text-center'>No hay productos para comparar.</p>";
+        }
+        document.getElementById("compareContent").innerHTML = content;
+        document.getElementById("compareModal").classList.remove("hidden");
+      });
+      function clearCompare() {
+        localStorage.removeItem("compareList");
+        document.getElementById("compareContent").innerHTML = "<p class='text-center'>No hay productos para comparar.</p>";
+      }
+      document.getElementById("closeCompare")?.addEventListener('click', () => {
+        document.getElementById("compareModal").classList.add("hidden");
+      });
+      
+      // --- Funciones de Favoritos ---
+      function saveProduct(name, price) {
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        if (!favorites.some(item => item.name === name)) {
+          favorites.push({ name, price });
+          localStorage.setItem("favorites", JSON.stringify(favorites));
+          alert("Producto guardado en favoritos.");
+        } else {
+          alert("El producto ya está guardado.");
+        }
+      }
+      
+      // --- Modal de Historial y Favoritos ---
+      document.getElementById("historyButton").addEventListener('click', showHistoryModal);
+      function showHistoryModal() {
+        let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        let historyHtml = "";
+        if (history.length > 0) {
+          historyHtml = "<li>" + history.map(item => `${item.date}: "${item.query}" (${item.minPrice}-${item.maxPrice})`).join("</li><li>") + "</li>";
+        } else {
+          historyHtml = "<li>No hay historial.</li>";
+        }
+        document.getElementById("searchHistoryList").innerHTML = historyHtml;
+        let favoritesHtml = "";
+        if (favorites.length > 0) {
+          favoritesHtml = "<li>" + favorites.map(item => `${item.name} (${item.price} USD)`).join("</li><li>") + "</li>";
+        } else {
+          favoritesHtml = "<li>No hay productos guardados.</li>";
+        }
+        document.getElementById("favoritesList").innerHTML = favoritesHtml;
+        document.getElementById("historyModal").classList.remove("hidden");
+      }
+      document.getElementById("closeHistory")?.addEventListener('click', () => {
+        document.getElementById("historyModal").classList.add("hidden");
+      });
+      
+      // --- Modal AXISS360 INFO ---
+      document.getElementById('axissInfoBtn').addEventListener('click', () => {
+        document.getElementById('axissModal').classList.remove('hidden');
+      });
+      document.getElementById('closeAxissModal').addEventListener('click', () => {
+        document.getElementById('axissModal').classList.add('hidden');
+      });
+      document.getElementById('axissModal').addEventListener('click', e => {
+        if(e.target === document.getElementById('axissModal')){
+          document.getElementById('axissModal').classList.add('hidden');
+        }
+      });
+      
+      // --- Formularios de Opiniones ---
+      document.getElementById('opinionesForm').addEventListener('submit', e => {
+        e.preventDefault();
+        if(localStorage.getItem("loggedIn") !== "true"){
+          alert("Debes iniciar sesión o registrarte para dejar una opinión.");
+          document.getElementById('loginModal').classList.remove('hidden');
+          return;
+        }
+        const t = document.getElementById('opinionText');
+        if(!t.value.trim()) return alert('Escribe tu opinión.');
+        const p = document.createElement('p');
+        p.textContent = t.value;
+        p.className = 'mb-2 text-black dark:text-white';
+        document.getElementById('opinionesDisplay').appendChild(p);
+        t.value = '';
+      });
+      
+      // --- Modal Login y Registro ---
+      document.getElementById('loginButton').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('loginModal').classList.remove('hidden');
+      });
+      document.getElementById('closeLogin').addEventListener('click', () => {
+        document.getElementById('loginModal').classList.add('hidden');
+      });
+      document.getElementById('loginForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        if(email && password){
+          alert("Inicio de sesión exitoso (simulado).");
+          localStorage.setItem("loggedIn", "true");
+          document.getElementById('loginModal').classList.add('hidden');
+        }
+      });
+      document.getElementById('registerNowButton').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('registerModal').classList.remove('hidden');
+      });
+      document.getElementById('openRegisterFromLogin')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('loginModal').classList.add('hidden');
+        document.getElementById('registerModal').classList.remove('hidden');
+      });
+      document.getElementById('openLoginFromRegister')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('registerModal').classList.add('hidden');
+        document.getElementById('loginModal').classList.remove('hidden');
+      });
+      document.getElementById('closeRegister').addEventListener('click', () => {
+        document.getElementById('registerModal').classList.add('hidden');
+      });
+      document.getElementById('registerForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('registerName').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        if(name && email && password){
+          alert("Registro exitoso (simulado).");
+          document.getElementById('registerModal').classList.add('hidden');
+        }
+      });
+      
+    </script>
+  </body>
+</html>
