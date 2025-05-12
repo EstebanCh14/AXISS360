@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pasarela de Pagos - CLEJ-TECH</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800, once: true });
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-indigo-700 via-purple-600 to-pink-500 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-200 transition-colors duration-500">
+    
+    <!-- HEADER Minimalista y Fijo -->
+    <header class="fixed top-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-lg z-50">
+      <div class="container mx-auto flex items-center justify-between py-4 px-6">
+        <a href="index.html" class="flex items-center text-2xl font-bold text-white dark:text-indigo-400">
+          <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2" />
+          CLEJ-TECH
+        </a>
+        <nav class="hidden md:flex space-x-6 text-sm">
+          <a href="index.html#inicio" class="hover:text-white dark:hover:text-indigo-400 transition-colors">Inicio</a>
+          <a href="index.html#opiniones" class="hover:text-white dark:hover:text-indigo-400 transition-colors">Opiniones</a>
+          <a href="comercio.html" class="hover:text-white dark:hover:text-indigo-400 transition-colors">Comercio</a>
+        </nav>
+      </div>
+    </header>
+    
+    <!-- MAIN: Contenedor de la Pasarela de Pagos -->
+    <main class="container mx-auto mt-32 px-4 py-20">
+      <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl shadow-2xl p-12 max-w-3xl mx-auto border border-gray-300 dark:border-gray-700">
+        <h1 class="text-4xl font-bold text-center mb-8 text-indigo-700 dark:text-white">Carrito de Compras</h1>
+        
+        <!-- Selector de Moneda -->
+        <div class="flex justify-center mb-6">
+          <select id="currencySwitch" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full py-2 px-6 focus:outline-none transition-colors duration-300 shadow-md">
+            <option value="COP" selected>COP</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+        
+        <!-- Lista de productos -->
+        <div id="cartItems" class="space-y-4">
+          <!-- Los productos agregados se mostraran aquí mediante JS -->
+        </div>
+        
+        <!-- Total y Botones de acción -->
+        <div class="mt-10 text-center">
+          <h2 id="totalAmount" class="text-3xl font-semibold mb-6 text-indigo-700 dark:text-white"></h2>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button id="emptyCart" class="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+              Vaciar Carrito
+            </button>
+            <button id="checkout" class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+              Pagar Ahora
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <!-- FOOTER (Minimalista) -->
+    <footer class="container mx-auto px-6 py-4 text-center border-t border-gray-200 dark:border-gray-700">
+      <p class="text-sm text-white">&copy; 2025 CLEJ-TECH. Todos los derechos reservados.</p>
+    </footer>
+    
+    <!-- SCRIPT: Funcionalidad del Carrito y Conversión de Moneda -->
+    <script>
+      // Tasa de conversión: 1 USD = 4000 COP
+      const conversionRate = 4000;
+      let currentCurrency = 'COP';
+      
+      // Actualiza los precios de cada producto usando data-usd y la moneda actual.
+      function updateCurrencyValues() {
+        document.querySelectorAll('.cart-item-price').forEach(el => {
+          const usd = parseFloat(el.getAttribute('data-usd'));
+          el.textContent = currentCurrency === 'USD'
+            ? 'USD ' + usd.toFixed(2)
+            : 'COP ' + (usd * conversionRate).toFixed(0);
+        });
+      }
+      
+      // Cargar carrito y actualizar total
+      function loadCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsDiv = document.getElementById('cartItems');
+        cartItemsDiv.innerHTML = '';
+        let totalUSD = 0;
+        if (cart.length === 0) {
+          cartItemsDiv.innerHTML = '<p class="text-center text-lg text-white">El carrito está vacío.</p>';
+        } else {
+          cart.forEach((item, index) => {
+            totalUSD += Number(item.price);
+            const itemDiv = document.createElement('div');
+            itemDiv.className = "flex justify-between items-center p-4 border-b border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-700/70 rounded-lg shadow-md";
+            itemDiv.innerHTML = `
+              <div>
+                <p class="font-bold text-indigo-700 dark:text-white">${item.name}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 cart-item-price" data-usd="${item.price}"></p>
+              </div>
+              <button onclick="removeFromCart(${index})" class="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-lg shadow-md transition-transform transform hover:scale-105">
+                Eliminar
+              </button>
+            `;
+            cartItemsDiv.appendChild(itemDiv);
+          });
+        }
+        const totalAmountEl = document.getElementById('totalAmount');
+        totalAmountEl.textContent = currentCurrency === 'USD'
+          ? 'Total: USD ' + totalUSD.toFixed(2)
+          : 'Total: COP ' + (totalUSD * conversionRate).toFixed(0);
+        updateCurrencyValues();
+      }
+      
+      document.getElementById('currencySwitch').addEventListener('change', (e) => {
+        currentCurrency = e.target.value;
+        loadCart();
+      });
+      
+      window.addEventListener('load', loadCart);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLEJ-TECH - AXISS360</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Facebook SDK -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js"></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 text-black dark:text-white transition-colors duration-500">
+    <!-- HEADER / NAVBAR -->
+    <header class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
+      <div class="container mx-auto flex items-center justify-between py-4 px-6">
+        <!-- Logo -->
+        <a href="#inicio" class="flex items-center text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+          <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2" />
+          CLEJ-TECH
+        </a>
+        <!-- Menú principal -->
+        <nav class="hidden md:flex space-x-4 font-medium text-sm">
+          <a href="#inicio" class="hover:text-indigo-600 dark:hover:text-indigo-400">Inicio</a>
+          <a href="#opiniones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Opiniones</a>
+          <a href="#productos" class="hover:text-indigo-600 dark:hover:text-indigo-400">Productos</a>
+          <button id="axissInfoBtn" class="hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none">AXISS360</button>
+        </nav>
+        <!-- Acciones -->
+        <div class="flex items-center space-x-2">
+          <!-- Selector de moneda -->
+          <select id="currencySwitch" class="bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-full p-2">
+            <option value="COP" selected>COP</option>
+            <option value="USD">USD</option>
+          </select>
+          <!-- Botón de búsqueda -->
+          <button id="search-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M21 21l-4.35-4.35M16 10.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
+            </svg>
+          </button>
+          <!-- Botón de Notificaciones -->
+          <button id="notifications-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Notificaciones">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C8.67 6.165 8 7.388 8 8.75v5.408c0 .538-.214 1.055-.595 1.436L6 17h5m4 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </button>
+          <!-- Botón de Filtros -->
+          <button id="filter-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none" aria-label="Filtros">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V19a1 1 0 01-1 1h-2a1 1 0 01-1-1v-5.586L3.293 6.707A1 1 0 013 6V4z" />
+            </svg>
+          </button>
+          <!-- Carrito -->
+          <a href="payment.html" id="cartButton" class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1 2M17 13l1 2M5 21h2a2 2 0 002-2H7a2 2 0 00-2-2zm10 0h2a2 2 0 002-2h-2a2 2 0 00-2-2h-2" />
+            </svg>
+            <span id="cartCount" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+          </a>
+          <!-- INICIAR SESIÓN -->
+          <a href="#" id="loginButton" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full text-sm font-medium">INICIAR SESIÓN</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MODALES GENERALES -->
+    <!-- Modal Búsqueda -->
+    <div id="modalSearch" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg">
+        <button id="closeSearch" class="mb-4">Cerrar</button>
+        <input id="searchQuery" type="text" placeholder="Buscar..." class="w-full p-2 border" />
+      </div>
+    </div>
+    <!-- Modal Filtros -->
+    <div id="modalFilter" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg">
+        <button id="closeFilter" class="mb-4">Cerrar</button>
+        <p>Filtro de productos aquí</p>
+      </div>
+    </div>
+    <!-- Modal Políticas de Privacidad -->
+    <div id="modalPrivacy" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md">
+        <button id="closePrivacy" class="mb-4">Cerrar</button>
+        <h2 class="text-xl font-bold mb-2">Políticas de Privacidad</h2>
+        <p>Aquí van las políticas...</p>
+      </div>
+    </div>
+    <!-- Modal AXISS360 INFO -->
+    <div id="axissModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-lg w-full relative">
+        <button id="closeAxissModal" class="absolute top-4 right-4 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <h2 class="text-2xl font-bold mb-4">Acerca de AXISS360</h2>
+        <p class="mb-4">AXISS360 es una empresa dedicada a brindar soluciones innovadoras en tecnología y consultoría digital...</p>
+        <p><strong>Email:</strong> contacto@axiss360.com</p>
+        <p><strong>Teléfono:</strong> +57 123 456 789</p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN INICIO -->
+    <section id="inicio" class="pt-32 pb-20 bg-gradient-to-r from-indigo-500 to-purple-500 text-white" data-aos="fade-down">
+      <div class="container mx-auto text-center px-6">
+        <h1 class="text-5xl font-bold mb-4">Bienvenido a CLEJ-TECH</h1>
+        <p class="text-xl mb-8">Compara dispositivos, recibe recomendaciones personalizadas y compra con seguridad.</p>
+        <a href="#" id="registerNowButton" class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition">
+          COMIENZA AHORA
+        </a>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <section id="productos" class="container mx-auto px-6 py-20">
+      <h2 class="text-4xl font-bold text-center mb-10">Productos Destacados</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Aquí se incluyen los 10 productos existentes + los nuevos -->
+        <!-- Producto 1 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up">
+          <img src="assets/samsung_s22.jpg" alt="Samsung Galaxy S22" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy S22</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="849"></p>
+          <button onclick="addToCart('Samsung Galaxy S22', 849)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 2 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/samsung_s23.jpg" alt="Samsung Galaxy S23" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy S23</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="999"></p>
+          <button onclick="addToCart('Samsung Galaxy S23', 999)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 3 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/samsung_a53.jpg" alt="Samsung Galaxy A53" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy A53</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="399"></p>
+          <button onclick="addToCart('Samsung Galaxy A53', 399)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 4 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/xiaomi_redmi_note11.jpg" alt="Xiaomi Redmi Note 11" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Redmi Note 11</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="249"></p>
+          <button onclick="addToCart('Xiaomi Redmi Note 11', 249)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 5 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="400">
+          <img src="assets/xiaomi_mi_11.jpg" alt="Xiaomi Mi 11" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Mi 11</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="599"></p>
+          <button onclick="addToCart('Xiaomi Mi 11', 599)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 6 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="500">
+          <img src="assets/xiaomi_poco_x3.jpg" alt="Xiaomi Poco X3" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Poco X3</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="299"></p>
+          <button onclick="addToCart('Xiaomi Poco X3', 299)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 7 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="600">
+          <img src="assets/iphone_13.jpg" alt="Apple iPhone 13" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Apple iPhone 13</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="899"></p>
+          <button onclick="addToCart('Apple iPhone 13', 899)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 8 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="700">
+          <img src="assets/iphone_se.jpg" alt="Apple iPhone SE" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Apple iPhone SE</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="399"></p>
+          <button onclick="addToCart('Apple iPhone SE', 399)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 9 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="800">
+          <img src="assets/oneplus_10_pro.jpg" alt="OnePlus 10 Pro" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">OnePlus 10 Pro</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="799"></p>
+          <button onclick="addToCart('OnePlus 10 Pro', 799)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 10 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="900">
+          <img src="assets/moto_g_power.jpg" alt="Motorola Moto G Power" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Motorola Moto G Power</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300 price" data-usd="249"></p>
+          <button onclick="addToCart('Motorola Moto G Power', 249)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 11 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="1000">
+          <img src="assets/sony_xperia_5.jpg" alt="Sony Xperia 5" class="w-full h-48 object-cover rounded" />
+          <h3 class="mt-6 text-xl font-bold">Sony Xperia 5</h3>
+          <p class="mt-2 price" data-usd="799"></p>
+          <button onclick="addToCart('Sony Xperia 5', 799)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+        <!-- Producto 12 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="1100">
+          <img src="assets/pixel_6.jpg" alt="Google Pixel 6" class="w-full h-48 object-cover rounded" />
+          <h3 class="mt-6 text-xl font-bold">Google Pixel 6</h3>
+          <p class="mt-2 price" data-usd="699"></p>
+          <button onclick="addToCart('Google Pixel 6', 699)" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded">
+            Agregar al Carrito
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPINIONES -->
+    <section id="opiniones" class="container mx-auto px-6 py-20">
+      <div class="bg-white dark:bg-gray-800 p-12 rounded-2xl shadow-lg" data-aos="fade-up" style="scroll-margin-top: 80px;">
+        <h2 class="text-3xl font-bold mb-6 text-black dark:text-white">Opiniones</h2>
+        <form id="opinionesForm">
+          <textarea id="opinionText" rows="4" class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Escribe tu opinión aquí..."></textarea>
+          <button type="submit" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-lg transition">
+            Enviar Opinión
+          </button>
+        </form>
+        <div id="opinionesDisplay" class="mt-6"></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="container mx-auto px-6 py-4 text-center">
+      <button id="openPrivacyModal" class="text-indigo-600 hover:text-indigo-700 underline">
+        Políticas de Privacidad
+      </button>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Inicializar AOS
+      AOS.init({ duration: 800, once: true });
+
+      // --- Función de conversión de precios ---
+      const conversionRate = 4000; // 1 USD = 4000 COP
+      let currentCurrency = 'COP';
+      function updatePrices() {
+        document.querySelectorAll('.price').forEach(el => {
+          const usd = parseFloat(el.dataset.usd);
+          el.textContent = currentCurrency === 'USD'
+            ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(usd)
+            : new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(usd * conversionRate);
+        });
+      }
+      document.getElementById('currencySwitch').addEventListener('change', e => {
+        currentCurrency = e.target.value;
+        updatePrices();
+      });
+
+      // --- Funciones del Carrito ---
+      function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ name, price });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        alert('Producto agregado al carrito.');
+      }
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const badge = document.getElementById('cartCount');
+        badge.textContent = cart.length;
+        badge.style.display = cart.length ? 'block' : 'none';
+      }
+
+      // --- Inicializar precios y contador del carrito ---
+      window.addEventListener('load', () => {
+        updatePrices();
+        updateCartCount();
+      });
+
+      // --- Modales: Search, Filter, Privacy ---
+      ['Search', 'Filter', 'Privacy'].forEach(id => {
+        const btn = document.getElementById(id.toLowerCase() + '-toggle') || document.getElementById('open' + id + 'Modal');
+        const modal = document.getElementById('modal' + id);
+        const close = document.getElementById('close' + id);
+        if (btn && modal && close) {
+          btn.addEventListener('click', () => modal.classList.remove('hidden'));
+          close.addEventListener('click', () => modal.classList.add('hidden'));
+          modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
+        }
+      });
+
+      // --- Modal AXISS360 INFO ---
+      document.getElementById('axissInfoBtn').addEventListener('click', () => {
+        document.getElementById('axissModal').classList.remove('hidden');
+      });
+      document.getElementById('closeAxissModal').addEventListener('click', () => {
+        document.getElementById('axissModal').classList.add('hidden');
+      });
+      document.getElementById('axissModal').addEventListener('click', e => {
+        if (e.target === document.getElementById('axissModal')) {
+          document.getElementById('axissModal').classList.add('hidden');
+        }
+      });
+
+      // --- Formulario de Opiniones ---
+      document.getElementById('opinionesForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const t = document.getElementById('opinionText');
+        if (!t.value.trim()) return alert('Escribe tu opinión.');
+        const p = document.createElement('p');
+        p.textContent = t.value;
+        p.className = 'mb-2 text-black dark:text-white';
+        document.getElementById('opinionesDisplay').appendChild(p);
+        t.value = '';
+      });
+    </script>
+  </body>
+</html>
