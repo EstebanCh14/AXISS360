@@ -962,38 +962,46 @@
       document.getElementById('registerForm').addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('registerName').value;
-        const email = document.getElementById('registerEmail').value;
+        const email = document.getElementById('registerEmail').value.trim().toLowerCase();
         const password = document.getElementById('registerPassword').value;
         if(name && email && password){
           showNotification("Registro exitoso (simulado).", 'success');
           document.getElementById('registerModal').classList.add('hidden');
           localStorage.setItem("loggedIn", "true");
-          localStorage.setItem("userData", JSON.stringify({ name, email }));
+          // Guardar SIEMPRE los datos del usuario
+          localStorage.setItem("userData", JSON.stringify({ name, email, password }));
           afterAuthChange();
         }
       });
 
-      // --- Guardar nombre de usuario al iniciar sesión (si ya existe) ---
+      // --- Guardar nombre de usuario al iniciar sesión (si ya existe) y validar contraseña ---
       document.getElementById('loginForm').addEventListener('submit', e => {
         e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const password = document.getElementById('loginPassword').value;
-        if(email && password){
-          showNotification("Inicio de sesión exitoso (simulado).", 'success');
-          localStorage.setItem("loggedIn", "true");
-          document.getElementById('loginModal').classList.add('hidden');
-          let userData = JSON.parse(localStorage.getItem("userData") || "{}");
-          if (!userData.email) {
-            localStorage.setItem("userData", JSON.stringify({ name: "Usuario", email }));
+        let userData = JSON.parse(localStorage.getItem("userData") || "{}");
+        const storedEmail = (userData.email || "").trim().toLowerCase();
+        const storedPassword = userData.password || "";
+        if (storedEmail && storedPassword) {
+          if (email === storedEmail && password === storedPassword) {
+            showNotification("Inicio de sesión exitoso (simulado).", 'success');
+            localStorage.setItem("loggedIn", "true");
+            // Asegurarse de que los datos del usuario siguen guardados
+            localStorage.setItem("userData", JSON.stringify(userData));
+            document.getElementById('loginModal').classList.add('hidden');
+            afterAuthChange();
+          } else {
+            showNotification("Correo o contraseña incorrectos.", "error");
           }
-          afterAuthChange();
+        } else {
+          showNotification("No existe una cuenta registrada con ese correo.", "error");
         }
       });
 
-      // --- Limpiar datos de usuario al cerrar sesión ---
+      // --- Limpiar solo el estado de sesión, NO los datos del usuario ---
       document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem("loggedIn");
-        localStorage.removeItem("userData");
+        // NO eliminar userData aquí
         afterAuthChange();
         showNotification("Sesión cerrada.", "info");
       });
@@ -1047,11 +1055,6 @@
         if (!dropdown.classList.contains('hidden')) {
           dropdown.classList.add('hidden');
         }
-      });
-      document.getElementById('logoutBtn').addEventListener('click', function() {
-        localStorage.removeItem("loggedIn");
-        afterAuthChange();
-        showNotification("Sesión cerrada.", "info");
       });
 
       // --- Función para mostrar el modal de notificaciones ---
@@ -1234,13 +1237,24 @@
 
       document.getElementById('loginForm').addEventListener('submit', e => {
         e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const password = document.getElementById('loginPassword').value;
-        if(email && password){
-          showNotification("Inicio de sesión exitoso (simulado).", 'success');
-          localStorage.setItem("loggedIn", "true");
-          document.getElementById('loginModal').classList.add('hidden');
-          afterAuthChange();
+        // Obtener datos de usuario guardados
+        let userData = JSON.parse(localStorage.getItem("userData") || "{}");
+        // Normalizar el correo guardado para comparar correctamente
+        const storedEmail = (userData.email || "").trim().toLowerCase();
+        if (storedEmail) {
+          if (email === storedEmail && password === userData.password) {
+            showNotification("Inicio de sesión exitoso (simulado).", 'success');
+            localStorage.setItem("loggedIn", "true");
+            document.getElementById('loginModal').classList.add('hidden');
+            afterAuthChange();
+          } else {
+            showNotification("Correo o contraseña incorrectos.", "error");
+          }
+        } else {
+          // Si no hay usuario registrado, NO permitir login
+          showNotification("No existe una cuenta registrada con ese correo.", "error");
         }
       });
       document.getElementById('registerForm').addEventListener('submit', e => {
