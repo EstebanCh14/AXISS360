@@ -369,7 +369,10 @@
         <h2 class="text-center text-2xl font-bold text-indigo-600 mb-6">Historial y Favoritos</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 class="text-xl font-semibold mb-4">Historial de Búsqueda</h3>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold">Historial de Búsqueda</h3>
+              <button id="clearHistoryBtn" class="text-red-600 hover:underline text-sm font-medium">Borrar historial</button>
+            </div>
             <ul id="searchHistoryList" class="list-disc pl-5 text-gray-700 dark:text-gray-300"></ul>
           </div>
           <div>
@@ -861,6 +864,15 @@
       document.getElementById("closeHistory")?.addEventListener('click', () => {
         document.getElementById("historyModal").classList.add("hidden");
       });
+
+      // --- Borrar historial de búsqueda ---
+      document.getElementById("clearHistoryBtn").addEventListener('click', function() {
+        if (confirm("¿Estás seguro de que deseas borrar todo el historial de búsqueda?")) {
+          localStorage.removeItem("searchHistory");
+          document.getElementById("searchHistoryList").innerHTML = "<li>No hay historial.</li>";
+          showNotification("Historial de búsqueda borrado.", "success");
+        }
+      });
       
       // --- Modal AXISS360 INFO ---
       document.getElementById('axissInfoBtn').addEventListener('click', () => {
@@ -1212,4 +1224,3 @@
     </script>
   </body>
 </html>
-
