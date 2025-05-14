@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="es" class="scroll-smooth">
     <head>
       <meta charset="UTF-8" />
@@ -133,10 +133,27 @@
       </div>
       <!-- Modal Políticas de Privacidad -->
       <div id="modalPrivacy" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md">
-          <button id="closePrivacy" class="mb-4">Cerrar</button>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md relative">
+          <button id="closePrivacy" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
           <h2 class="text-xl font-bold mb-2">Políticas de Privacidad</h2>
-          <p>Aquí van las políticas...</p>
+          <p class="mb-2 text-gray-700 dark:text-gray-200">
+            En CLEJ-TECH y AXISS360, tu privacidad es fundamental. Recopilamos únicamente la información necesaria para brindarte una experiencia personalizada y segura. Tus datos no serán compartidos con terceros sin tu consentimiento y puedes solicitar su eliminación en cualquier momento. Utilizamos tecnologías de cifrado y buenas prácticas de seguridad para proteger tu información.
+          </p>
+          <ul class="list-disc pl-5 text-gray-700 dark:text-gray-200 mb-2">
+            <li>Solo almacenamos datos esenciales para el funcionamiento de la plataforma.</li>
+            <li>No vendemos ni compartimos tus datos personales con terceros.</li>
+            <li>Puedes solicitar la eliminación de tu cuenta y datos en cualquier momento.</li>
+            <li>Utilizamos cookies solo para mejorar la experiencia de usuario y análisis interno.</li>
+            <li>Para más información, contáctanos a <a href="mailto:contacto@axiss360.com" class="text-indigo-600 underline">contacto@axiss360.com</a>.</li>
+          </ul>
+          <div class="mt-4 text-right">
+            <button id="closePrivacyBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Cerrar</button>
+          </div>
         </div>
       </div>
       <!-- Modal AXISS360 INFO -->
@@ -1304,6 +1321,22 @@
           localStorage.removeItem("loggedIn");
           afterAuthChange();
           showNotification("Sesión cerrada.", "info");
+        });
+
+        // --- Políticas de Privacidad: abrir/cerrar modal ---
+        document.getElementById('openPrivacyModal').addEventListener('click', function() {
+          document.getElementById('modalPrivacy').classList.remove('hidden');
+        });
+        document.getElementById('closePrivacy').addEventListener('click', function() {
+          document.getElementById('modalPrivacy').classList.add('hidden');
+        });
+        document.getElementById('closePrivacyBtn').addEventListener('click', function() {
+          document.getElementById('modalPrivacy').classList.add('hidden');
+        });
+        document.getElementById('modalPrivacy').addEventListener('click', function(e) {
+          if (e.target === document.getElementById('modalPrivacy')) {
+            document.getElementById('modalPrivacy').classList.add('hidden');
+          }
         });
       </script>
     </body>
