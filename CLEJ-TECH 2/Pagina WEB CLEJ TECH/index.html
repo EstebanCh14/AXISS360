@@ -618,7 +618,7 @@
             Enviar Opinión
           </button>
         </form>
-        <div id="opinionesDisplay" class="mt-6"></div>
+        <div id="opinionesDisplay" class="mt-6 space-y-4"></div>
       </div>
     </section>
 
@@ -900,7 +900,37 @@
         }
       });
       
-      // --- Formularios de Opiniones ---
+      // --- Guardar y mostrar opiniones con nombre de usuario ---
+      function getCurrentUser() {
+        const user = JSON.parse(localStorage.getItem("userData") || "{}");
+        return user.name || "Usuario";
+      }
+
+      function saveOpinionToStorage(opinionObj) {
+        let opiniones = JSON.parse(localStorage.getItem("opiniones")) || [];
+        opiniones.push(opinionObj);
+        localStorage.setItem("opiniones", JSON.stringify(opiniones));
+      }
+
+      function renderOpiniones() {
+        const opiniones = JSON.parse(localStorage.getItem("opiniones")) || [];
+        const container = document.getElementById('opinionesDisplay');
+        if (opiniones.length === 0) {
+          container.innerHTML = "<p class='text-gray-400'>No hay opiniones aún.</p>";
+          return;
+        }
+        container.innerHTML = opiniones.map(op => `
+          <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 shadow flex flex-col">
+            <div class="flex items-center mb-2">
+              <span class="font-semibold text-indigo-700 dark:text-indigo-300">${op.name}</span>
+              <span class="ml-2 text-xs text-gray-500">${op.date}</span>
+            </div>
+            <div class="text-black dark:text-white">${op.text}</div>
+          </div>
+        `).join('');
+      }
+
+      // --- Formularios de Opiniones mejorado ---
       document.getElementById('opinionesForm').addEventListener('submit', e => {
         e.preventDefault();
         if(localStorage.getItem("loggedIn") !== "true"){
@@ -910,21 +940,40 @@
         }
         const t = document.getElementById('opinionText');
         if(!t.value.trim()) return showNotification('Escribe tu opinión.', 'info');
-        const p = document.createElement('p');
-        p.textContent = t.value;
-        p.className = 'mb-2 text-black dark:text-white';
-        document.getElementById('opinionesDisplay').appendChild(p);
+        const user = JSON.parse(localStorage.getItem("userData") || "{}");
+        const name = user.name || "Usuario";
+        const opinionObj = {
+          name,
+          text: t.value,
+          date: new Date().toLocaleString()
+        };
+        saveOpinionToStorage(opinionObj);
+        renderOpiniones();
         t.value = '';
+        showNotification('¡Gracias por tu opinión!', 'success');
       });
-      
-      // --- Modal Login y Registro ---
-      document.getElementById('loginButton').addEventListener('click', (e) => {
+
+      // Mostrar opiniones al cargar la página
+      window.addEventListener('load', () => {
+        renderOpiniones();
+      });
+
+      // --- Guardar nombre de usuario al registrarse ---
+      document.getElementById('registerForm').addEventListener('submit', e => {
         e.preventDefault();
-        document.getElementById('loginModal').classList.remove('hidden');
+        const name = document.getElementById('registerName').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        if(name && email && password){
+          showNotification("Registro exitoso (simulado).", 'success');
+          document.getElementById('registerModal').classList.add('hidden');
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("userData", JSON.stringify({ name, email }));
+          afterAuthChange();
+        }
       });
-      document.getElementById('closeLogin').addEventListener('click', () => {
-        document.getElementById('loginModal').classList.add('hidden');
-      });
+
+      // --- Guardar nombre de usuario al iniciar sesión (si ya existe) ---
       document.getElementById('loginForm').addEventListener('submit', e => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
@@ -933,8 +982,29 @@
           showNotification("Inicio de sesión exitoso (simulado).", 'success');
           localStorage.setItem("loggedIn", "true");
           document.getElementById('loginModal').classList.add('hidden');
+          let userData = JSON.parse(localStorage.getItem("userData") || "{}");
+          if (!userData.email) {
+            localStorage.setItem("userData", JSON.stringify({ name: "Usuario", email }));
+          }
           afterAuthChange();
         }
+      });
+
+      // --- Limpiar datos de usuario al cerrar sesión ---
+      document.getElementById('logoutBtn').addEventListener('click', function() {
+        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("userData");
+        afterAuthChange();
+        showNotification("Sesión cerrada.", "info");
+      });
+
+      // --- Modal Login y Registro ---
+      document.getElementById('loginButton').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('loginModal').classList.remove('hidden');
+      });
+      document.getElementById('closeLogin').addEventListener('click', () => {
+        document.getElementById('loginModal').classList.add('hidden');
       });
       document.getElementById('registerNowButton').addEventListener('click', (e) => {
         e.preventDefault();
@@ -953,18 +1023,6 @@
       document.getElementById('closeRegister').addEventListener('click', () => {
         document.getElementById('registerModal').classList.add('hidden');
       });
-      document.getElementById('registerForm').addEventListener('submit', e => {
-        e.preventDefault();
-        const name = document.getElementById('registerName').value;
-        const email = document.getElementById('registerEmail').value;
-        const password = document.getElementById('registerPassword').value;
-        if(name && email && password){
-          showNotification("Registro exitoso (simulado).", 'success');
-          document.getElementById('registerModal').classList.add('hidden');
-          localStorage.setItem("loggedIn", "true");
-          afterAuthChange();
-        }
-      });
 
       // --- Lógica de usuario autenticado (círculo y logout) ---
       function updateUserUI() {
@@ -979,20 +1037,17 @@
           loginBtn.classList.remove('hidden');
         }
       }
-      // Mostrar/ocultar menú de usuario al hacer click en el círculo
       document.getElementById('userCircleBtn').addEventListener('click', function(e) {
         e.stopPropagation();
         const dropdown = document.getElementById('userDropdown');
         dropdown.classList.toggle('hidden');
       });
-      // Cerrar menú si se hace click fuera
       document.addEventListener('click', function(e) {
         const dropdown = document.getElementById('userDropdown');
         if (!dropdown.classList.contains('hidden')) {
           dropdown.classList.add('hidden');
         }
       });
-      // Cerrar sesión
       document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem("loggedIn");
         afterAuthChange();
@@ -1020,12 +1075,10 @@
         document.getElementById('modalFilter').classList.add('hidden');
       });
 
-      // Cambiar el color de la letra en los campos de filtro para que sea negra
       document.querySelectorAll('#filterForm input, #filterForm select').forEach(field => {
         field.style.color = 'black';
       });
 
-      // Mostrar productos que coincidan con los filtros
       document.getElementById('filterForm').addEventListener('submit', e => {
         e.preventDefault();
         const brand = document.getElementById('brandFilter').value;
@@ -1047,13 +1100,11 @@
         document.getElementById('modalFilter').classList.add('hidden');
       });
 
-      // Cambiar el color de la letra en los campos de entrada para que sea negra
       const inputFields = document.querySelectorAll('input, textarea');
       inputFields.forEach(field => {
         field.style.color = 'black';
       });
 
-      // --- MODAL CARRITO Y MEDIOS DE PAGO ---
       function renderCartModal() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const cartItemsDiv = document.getElementById('cartItems');
@@ -1093,7 +1144,6 @@
           document.getElementById('keepBuyingButton').style.display = 'block';
         }
       }
-      // Eliminar producto del carrito
       function removeCartItem(idx) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         cart.splice(idx, 1);
@@ -1101,22 +1151,18 @@
         updateCartCount();
         renderCartModal();
       }
-      // Mostrar modal al hacer click en el carrito o badge
       document.getElementById('cartButton').addEventListener('click', function(e) {
         e.preventDefault();
         renderCartModal();
         document.getElementById('cartModal').classList.remove('hidden');
       });
-      // Cerrar modal carrito
       document.getElementById('closeCartModal').addEventListener('click', function() {
         document.getElementById('cartModal').classList.add('hidden');
       });
-      // Botón seguir comprando
       document.getElementById('keepBuyingButton').addEventListener('click', function() {
         document.getElementById('cartModal').classList.add('hidden');
       });
 
-      // Pagar
       document.getElementById('payButton').addEventListener('click', function() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         if (cart.length === 0) {
@@ -1135,18 +1181,16 @@
         document.getElementById('cartModal').classList.add('hidden');
       });
 
-      // --- BLOQUEO DE FUNCIONALIDAD PARA NO REGISTRADOS ---
       function restrictForGuests() {
         const loggedIn = localStorage.getItem("loggedIn") === "true";
-        // Botones de acción que requieren login
         const actionSelectors = [
           '#cartButton',
           '#compareButton',
           '#historyButton',
           '#filter-toggle',
           '#search-toggle',
-          '.price + button', // "Agregar al Carrito"
-          '.price ~ div button', // "Comparar" y "Guardar"
+          '.price + button',
+          '.price ~ div button',
           '#payButton'
         ];
         actionSelectors.forEach(sel => {
@@ -1160,7 +1204,6 @@
             }
           });
         });
-        // Mostrar/ocultar overlays o mensajes si se desea
       }
       function guestBlockHandler(e) {
         e.preventDefault();
@@ -1168,10 +1211,8 @@
         document.getElementById('loginModal').classList.remove('hidden');
       }
 
-      // --- Sobrescribir funciones de acción para invitados ---
       function enableOrDisableActions() {
         restrictForGuests();
-        // Deshabilitar inputs de filtros y búsqueda para invitados
         const loggedIn = localStorage.getItem("loggedIn") === "true";
         document.querySelectorAll('#filterForm input, #filterForm select, #advancedSearchForm input, #advancedSearchForm button').forEach(el => {
           el.disabled = !loggedIn;
@@ -1181,7 +1222,6 @@
         });
       }
 
-      // --- Hook en login/logout/registro y al cargar ---
       function afterAuthChange() {
         updateUserUI();
         enableOrDisableActions();
@@ -1192,7 +1232,6 @@
         afterAuthChange();
       });
 
-      // --- En login/logout/registro, llamar afterAuthChange ---
       document.getElementById('loginForm').addEventListener('submit', e => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
