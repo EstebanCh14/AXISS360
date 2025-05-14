@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comercio - CLEJ-TECH</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 text-black dark:text-white transition-colors duration-500">
+    
+    <!-- HEADER (Barra fija en la parte superior) -->
+    <header class="fixed top-0 w-full bg-white dark:bg-gray-800 shadow-md z-50">
+      <div class="container mx-auto flex items-center justify-between py-4 px-6">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+          <img src="assets/3.png" alt="Logo" class="h-10 w-10 mr-2" />
+          CLEJ-TECH
+        </a>
+        <!-- Menú simplificado -->
+        <nav class="hidden md:flex space-x-4 font-medium text-sm">
+          <a href="index.html#inicio" class="hover:text-indigo-600 dark:hover:text-indigo-400">Inicio</a>
+          <a href="index.html#opiniones" class="hover:text-indigo-600 dark:hover:text-indigo-400">Opiniones</a>
+          <a href="comercio.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Comercio</a>
+        </nav>
+      </div>
+    </header>
+    
+    <!-- MAIN: PRODUCTOS -->
+    <!-- Se agrega un margen superior (mt-32) para considerar el header fijo en la parte superior -->
+    <main class="container mx-auto mt-32 px-6 py-20">
+      <h1 class="text-4xl font-bold text-center mb-10">Nuestros Dispositivos</h1>
+      <!-- Grid de productos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Producto 1: Samsung Galaxy S22 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up">
+          <img src="assets/samsung_s22.jpg" alt="Samsung Galaxy S22" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy S22</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$849</p>
+        </div>
+        <!-- Producto 2: Samsung Galaxy S23 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/samsung_s23.jpg" alt="Samsung Galaxy S23" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy S23</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$999</p>
+        </div>
+        <!-- Producto 3: Samsung Galaxy A53 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/samsung_a53.jpg" alt="Samsung Galaxy A53" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Samsung Galaxy A53</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$399</p>
+        </div>
+        <!-- Producto 4: Xiaomi Redmi Note 11 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/xiaomi_redmi_note11.jpg" alt="Xiaomi Redmi Note 11" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Redmi Note 11</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$399</p>
+        </div>
+        <!-- Producto 5: Xiaomi Mi 11 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="400">
+          <img src="assets/xiaomi_mi_11.jpg" alt="Xiaomi Mi 11" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Mi 11</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$599</p>
+        </div>
+        <!-- Producto 6: Xiaomi Poco X3 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="500">
+          <img src="assets/xiaomi_poco_x3.jpg" alt="Xiaomi Poco X3" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Xiaomi Poco X3</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$299</p>
+        </div>
+        <!-- Producto 7: Apple iPhone 13 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="600">
+          <img src="assets/iphone_13.jpg" alt="Apple iPhone 13" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Apple iPhone 13</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$999</p>
+        </div>
+        <!-- Producto 8: Apple iPhone SE -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="700">
+          <img src="assets/iphone_se.jpg" alt="Apple iPhone SE" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Apple iPhone SE</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$399</p>
+        </div>
+        <!-- Producto 9: OnePlus 10 Pro -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="800">
+          <img src="assets/oneplus_10_pro.jpg" alt="OnePlus 10 Pro" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">OnePlus 10 Pro</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$799</p>
+        </div>
+        <!-- Producto 10: Motorola Moto G Power -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow" data-aos="fade-up" data-aos-delay="900">
+          <img src="assets/moto_g_power.jpg" alt="Motorola Moto G Power" class="w-full h-48 object-cover rounded">
+          <h2 class="mt-6 text-xl font-bold">Motorola Moto G Power</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">$249</p>
+        </div>
+      </div>
+    </main>
+    
+    <!-- FOOTER -->
+    <footer class="container mx-auto px-6 py-4 text-center">
+      <p class="text-sm">&copy; 2025 CLEJ-TECH. Todos los derechos reservados.</p>
+    </footer>
+    
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800, once: true });
+    </script>
+  </body>
+</html>
